@@ -1,35 +1,57 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
+export default function OnboardingLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
+    <Tabs initialRouteName="home">
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
+          tabBarShowLabel: false,
+          tabBarIcon(props) {
+            return (
+              <AntDesign size={24} name="appstore-o" color={props.color} />
+            );
+          },
+          headerShown: false,
         }}
       />
+
       <Tabs.Screen
-        name="explore"
+        name="location"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
+          tabBarShowLabel: false,
+          tabBarIcon(props) {
+            return (
+              <Ionicons size={24} name="location-outline" color={props.color} />
+            );
+          },
+          headerShown: false,
+        }}
+      />
+
+      <Tabs.Screen
+        name="message"
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon(props) {
+            return (
+              <AntDesign size={24} name="message1" color={props.color} />
+            );
+          },
+          headerShown: false,
+        }}
+      />
+
+      <Tabs.Screen
+        name="profile"
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon(props) {
+            return (
+              <Ionicons size={24} name="person-outline" color={props.color} />
+            );
+          },
+          headerShown: false,
         }}
       />
     </Tabs>
