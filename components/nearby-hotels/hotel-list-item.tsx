@@ -1,4 +1,4 @@
-import hotels from "@/assets/data/hotels";
+import recommendatoins from "@/assets/data/recommendations";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import { AppTypes } from "@/types";
 import { Feather } from "@expo/vector-icons";
@@ -28,53 +28,19 @@ const HotelListItem = ({ item }: { item: AppTypes.HotelType }) => {
           source={item.image}
         />
         <View style={styles.descriptionWrapper}>
-          <Text style={[styles.title]} numberOfLines={1} ellipsizeMode="tail">
-            {item.name}
-          </Text>
-          <Text style={styles.subtitle} numberOfLines={1} ellipsizeMode="tail">
-            {item.location.name}
-          </Text>
+          <Text style={styles.title}>{item.name}</Text>
+          <Text style={styles.subtitle}>{item.location.name}</Text>
           <View style={styles.rattingWrapper}>
             <Text style={styles.rating}> ★ {item.rating} </Text>
-            {/* <Text style={styles.review}>{` (${item.reviews}) `}</Text> */}
+            <Text style={styles.review}>{` (${item.reviews}) `}</Text>
           </View>
         </View>
       </View>
     </TouchableOpacity>
   );
 };
-const NearbyHotels = () => {
-  const handleOnRecommendedIconPressed = () => {
-    router.push(AppRoutePath.nearbyHotels);
-  };
 
-  return (
-    <View style={{ paddingTop: 22 }}>
-      <View
-        style={{
-          paddingHorizontal: 4,
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <Text style={styles.header}>Nearby Hotels</Text>
-        <TouchableOpacity onPress={handleOnRecommendedIconPressed}>
-          <Feather name="list" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={hotels}
-        ListFooterComponent={() => <View style={styles.separator} />}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
-        renderItem={({ item }) => <HotelListItem item={item} />}
-      />
-    </View>
-  );
-};
-
-export default NearbyHotels;
+export default HotelListItem;
 
 const styles = StyleSheet.create({
   header: {
@@ -86,13 +52,12 @@ const styles = StyleSheet.create({
     padding: 8,
     alignItems: "stretch",
     justifyContent: "center",
-    flexDirection: "column",
+    flexDirection: "row",
     backgroundColor: "white",
     borderRadius: 8,
   },
   descriptionWrapper: {
-    // flex: 1,
-    maxWidth: 140,
+    flex: 1,
     alignItems: "flex-start",
     justifyContent: "space-between",
     paddingHorizontal: 8,
@@ -107,9 +72,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   image: {
-    // flex:1,
-    height: 120,
-    width: 140,
+    height: 80,
+    width: 80,
     borderRadius: 8,
   },
   title: {

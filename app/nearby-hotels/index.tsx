@@ -3,18 +3,19 @@ import { router } from "expo-router";
 import React, { useMemo, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import recommendatoins from "@/assets/data/recommendations";
+import hotels from "@/assets/data/hotels";
 import RecommendationListItem from "@/components/recommendations/recommendation-list-item";
+import HotelListItem from "@/components/nearby-hotels/hotel-list-item";
 
 export default function OnboardingScreen() {
   const [search, setSearch] = useState("");
 
-  const filteredRecommendations = useMemo(() => {
-    if (!search) return recommendatoins;
+  const filteredHotels = useMemo(() => {
+    if (!search) return hotels;
 
     const msearch = search.toLowerCase().trim();
 
-    return recommendatoins.filter((r) =>
+    return hotels.filter((r) =>
       r.name.toLowerCase().trim().includes(msearch)
     );
   }, [search]);
@@ -26,16 +27,16 @@ export default function OnboardingScreen() {
     <SafeAreaView>
       <AppBar
         onBackPressed={router.canGoBack() ? handleBackPressed : undefined}
-        title="Recommendations"
+        title="Nearby Hotels"
         onSearch={setSearch}
       />
       <View style={styles.container}>
         <FlatList
           showsHorizontalScrollIndicator={false}
-          data={filteredRecommendations}
+          data={filteredHotels}
           ListFooterComponent={() => <View style={styles.separator} />}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
-          renderItem={({ item }) => <RecommendationListItem item={item} />}
+          renderItem={({ item }) => <HotelListItem item={item} />}
         />
       </View>
     </SafeAreaView>

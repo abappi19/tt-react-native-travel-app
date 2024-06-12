@@ -65,7 +65,7 @@ export default function Index() {
       <View>
         <AppBar
           title="Hey User!"
-          onSearch={handleSearch}
+          // onSearch={handleSearch}
         />
 
         <Places />

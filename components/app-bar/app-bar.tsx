@@ -1,11 +1,11 @@
 import SIZES from "@/constants/tokens/sizes";
-import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import SearchComponent from "../search/search-component";
 
 type AppBarType = {
-  onSearch: (text: string) => void;
+  onSearch?: (text: string) => void;
   title: string;
   onBackPressed?: () => void;
 };
@@ -15,8 +15,21 @@ const AppBar = ({ onSearch, title, onBackPressed }: AppBarType) => {
   return (
     <View style={styles.container}>
       {onBackPressed && (
-        <TouchableOpacity style={{ marginEnd: 8 }} onPress={onBackPressed}>
-          <Ionicons name="arrow-back" size={24} color="black" />
+        <TouchableOpacity onPress={onBackPressed}>
+          <View
+            style={{
+              backgroundColor: "white",
+              borderRadius: 8,
+              marginEnd: 8,
+              padding: 4,
+              paddingEnd: 6,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <MaterialIcons name="arrow-back-ios-new" size={24} color="black" />
+          </View>
         </TouchableOpacity>
       )}
       {open || <Text style={styles.title}>{title}</Text>}
@@ -41,7 +54,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 8,
-    borderBottomColor: "#dddddd96",
-    borderBottomWidth: 1,
+    // borderBottomColor: "#FFFFFF",
+    // borderBottomWidth: 1,
   },
 });

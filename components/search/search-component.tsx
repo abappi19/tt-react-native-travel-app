@@ -17,10 +17,13 @@ export default function SearchComponent({
   const searchInputRef = useRef<TextInput>(null);
 
   useEffect(() => {
-    
     onSateChange(expanded);
 
-    if (!expanded) return;
+    if (!expanded) {
+      setSearchQuery("");
+      onSearch("");
+      return;
+    }
     if (searchInputRef.current?.isFocused) return;
 
     searchInputRef.current?.focus();
@@ -41,7 +44,7 @@ export default function SearchComponent({
         style={{
           alignItems: "center",
           flexDirection: "row",
-          backgroundColor: "#30303046",
+          backgroundColor: "#FFFFFF",
           borderRadius: expanded ? 22 : 8,
           padding: 8,
           flex: expanded ? 1 : 0,
