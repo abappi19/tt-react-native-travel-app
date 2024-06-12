@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import React, { useEffect, useMemo, useState } from "react";
@@ -19,6 +20,11 @@ import SIZES from "@/constants/tokens/sizes";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Recommendations from "@/components/home/recommendations";
 import AppBar from "@/components/app-bar/app-bar";
+import recommendations from "@/assets/data/recommendations";
+import RecommendationListItem from "@/components/recommendations/recommendation-list-item";
+import { Feather } from "@expo/vector-icons";
+import Button from "@/components/button/button";
+import { AppRoutePath } from "@/constants/app-route/app-route-path";
 
 const PlaceDetails = () => {
   const { id } = useLocalSearchParams();
@@ -37,6 +43,10 @@ const PlaceDetails = () => {
     router.back();
   };
 
+  const handleBestHotelsClick = () => {
+    router.push(AppRoutePath.nearbyHotels);
+  };
+
   return (
     <>
       <ScrollView
@@ -50,13 +60,27 @@ const PlaceDetails = () => {
           <View style={{ padding: 8 }}>
             <Text style={styles.title}>{country?.name}</Text>
             <Text style={styles.description}>{country?.description}</Text>
-            <Recommendations />
-            <Recommendations />
-            <Recommendations />
-            <Recommendations />
-            <Recommendations />
-            <Recommendations />
-            <Recommendations />
+
+            <View
+              style={{
+                paddingHorizontal: 4,
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <Text style={styles.header}>Popular Destinations</Text>
+              <TouchableOpacity onPress={() => {}}>
+                <Feather name="list" size={24} color="black" />
+              </TouchableOpacity>
+            </View>
+            <FlatList
+              nestedScrollEnabled
+              showsHorizontalScrollIndicator={false}
+              data={recommendations}
+              ListFooterComponent={() => <View style={styles.footer} />}
+              ItemSeparatorComponent={() => <View style={styles.separator} />}
+              renderItem={({ item }) => <RecommendationListItem item={item} />}
+            />
           </View>
         </View>
       </ScrollView>
@@ -77,6 +101,24 @@ const PlaceDetails = () => {
         onBackPressed={router.canGoBack() ? handleBackPressed : undefined}
         onSearch={() => {}}
       />
+
+      <View
+        style={{
+          position: "absolute",
+          zIndex: 999,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          // height: 48,
+          // backgroundColor: "white",
+        }}
+      >
+        <Button
+          style={{ margin: 8 }}
+          title="Find Best Hotels"
+          onPress={handleBestHotelsClick}
+        />
+      </View>
     </>
   );
 };
@@ -98,5 +140,16 @@ const styles = StyleSheet.create({
     // fontWeight: "bold",
     // fontSize: 24,
     paddingVertical: 16,
+  },
+  separator: {
+    padding: 4,
+  },
+  header: {
+    fontWeight: "bold",
+    fontSize: 18,
+    paddingVertical: 8,
+  },
+  footer: {
+    padding: 56,
   },
 });

@@ -10,4 +10,7 @@ export const AppRoutePath = {
   places(id: number) {
     return `/places/${id}`;
   },
+  hotels(id: number) {
+    return `/hotels/${id}`;
+  },
 };

@@ -31,5 +31,10 @@ export namespace AppTypes {
       name: string;
     };
     image: any;
+    description: string;
+    reviewList: {
+      name: string;
+      review: string;
+    }[];
   };
 }
