@@ -1,3 +1,5 @@
+import AppBar from "@/components/app-bar/app-bar";
+import NearbyHotels from "@/components/home/nearby-hotels";
 import Places from "@/components/home/places";
 import Recommendations from "@/components/home/recommendations";
 import OnboardingItemView from "@/components/onboarding/onboarding-item-view";
@@ -60,14 +62,15 @@ export default function Index() {
 
   return (
     <SafeAreaView>
-      <View style={{ padding: 8 }}>
-        <View style={styles.appBar}>
-          <Text>Hey User!</Text>
-          <SearchComponent onSearch={handleSearch} />
-        </View>
+      <View>
+        <AppBar
+          title="Hey User!"
+          onSearch={handleSearch}
+        />
 
         <Places />
         <Recommendations />
+        <NearbyHotels />
       </View>
     </SafeAreaView>
   );

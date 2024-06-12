@@ -4,15 +4,22 @@ import { TextInput, TouchableOpacity, View } from "react-native";
 
 type SearchComponentProps = {
   onSearch: (text: string) => void;
+  onSateChange: (open: boolean) => void;
 };
 
-export default function SearchComponent({ onSearch }: SearchComponentProps) {
+export default function SearchComponent({
+  onSearch,
+  onSateChange,
+}: SearchComponentProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [expanded, setExpanded] = useState(false);
 
   const searchInputRef = useRef<TextInput>(null);
 
   useEffect(() => {
+    
+    onSateChange(expanded);
+
     if (!expanded) return;
     if (searchInputRef.current?.isFocused) return;
 
@@ -25,9 +32,9 @@ export default function SearchComponent({ onSearch }: SearchComponentProps) {
         alignItems: "center",
         justifyContent: "flex-end",
         flexDirection: "row",
-        borderRadius: 22,
+        borderRadius: expanded ? 22 : 8,
         flex: 1,
-        paddingHorizontal: 4,
+        padding: 4,
       }}
     >
       <View
@@ -35,7 +42,7 @@ export default function SearchComponent({ onSearch }: SearchComponentProps) {
           alignItems: "center",
           flexDirection: "row",
           backgroundColor: "#30303046",
-          borderRadius: 22,
+          borderRadius: expanded ? 22 : 8,
           padding: 8,
           flex: expanded ? 1 : 0,
         }}

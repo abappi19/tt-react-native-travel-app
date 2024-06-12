@@ -17,6 +17,19 @@ export namespace AppTypes {
     rating: number;
     review: string;
     image: any;
-    location:string;
+    location: string;
+  };
+
+  export type HotelType = {
+    id: number;
+    name: string;
+    rating: number;
+    reviews: string;
+    location: {
+      lat: number;
+      long: number;
+      name: string;
+    };
+    image: any;
   };
 }

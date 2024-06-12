@@ -10,7 +10,6 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  TouchableOpacityBase,
   View,
 } from "react-native";
 
@@ -48,42 +47,8 @@ const RecommendationListItem = ({
     </TouchableOpacity>
   );
 };
-const Recommendations = () => {
 
-
-  const handleOnRecommendedIconPressed = () => {
-    router.push(AppRoutePath.recommendations);
-  }
-
-
-
-  return (
-    <View style={{ paddingTop: 22 }}>
-      <View
-        style={{
-          paddingHorizontal: 4,
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <Text style={styles.header}>Recommendations</Text>
-        <TouchableOpacity onPress={handleOnRecommendedIconPressed}>
-          <Feather name="list" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={recommendatoins}
-        ListFooterComponent={() => <View style={styles.separator} />}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
-        renderItem={({ item }) => <RecommendationListItem item={item} />}
-      />
-    </View>
-  );
-};
-
-export default Recommendations;
+export default RecommendationListItem;
 
 const styles = StyleSheet.create({
   header: {

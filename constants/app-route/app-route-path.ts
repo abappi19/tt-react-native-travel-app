@@ -5,7 +5,7 @@ export const AppRoutePath = {
   },
 
   onboarding: "/onboarding",
-  recommended: "/recommended",
+  recommendations: "/recommendations",
   places(id: number) {
     return `/places/${id}`;
   },

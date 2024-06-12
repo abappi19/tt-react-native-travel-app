@@ -1,4 +1,4 @@
-import recommendatoins from "@/assets/data/recommendations";
+import hotels from "@/assets/data/hotels";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import { AppTypes } from "@/types";
 import { Feather } from "@expo/vector-icons";
@@ -10,19 +10,10 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  TouchableOpacityBase,
   View,
 } from "react-native";
 
-
-
-
-
-const RecommendationListItem = ({
-  item,
-}: {
-  item: AppTypes.RecommendationType;
-}) => {
+const HotelListItem = ({ item }: { item: AppTypes.HotelType }) => {
   return (
     <TouchableOpacity
       onPress={() => {
@@ -37,25 +28,25 @@ const RecommendationListItem = ({
           source={item.image}
         />
         <View style={styles.descriptionWrapper}>
-          <Text style={styles.title}>{item.name}</Text>
-          <Text style={styles.subtitle}>{item.location}</Text>
+          <Text style={[styles.title]} numberOfLines={1} ellipsizeMode="tail">
+            {item.name}
+          </Text>
+          <Text style={styles.subtitle} numberOfLines={1} ellipsizeMode="tail">
+            {item.location.name}
+          </Text>
           <View style={styles.rattingWrapper}>
             <Text style={styles.rating}> ★ {item.rating} </Text>
-            <Text style={styles.review}>{` (${item.review}) `}</Text>
+            {/* <Text style={styles.review}>{` (${item.reviews}) `}</Text> */}
           </View>
         </View>
       </View>
     </TouchableOpacity>
   );
 };
-const Recommendations = () => {
-
-
+const NearbyHotels = () => {
   const handleOnRecommendedIconPressed = () => {
     router.push(AppRoutePath.recommendations);
-  }
-
-
+  };
 
   return (
     <View style={{ paddingTop: 22 }}>
@@ -66,7 +57,7 @@ const Recommendations = () => {
           justifyContent: "space-between",
         }}
       >
-        <Text style={styles.header}>Recommendations</Text>
+        <Text style={styles.header}>Nearby Hotels</Text>
         <TouchableOpacity onPress={handleOnRecommendedIconPressed}>
           <Feather name="list" size={24} color="black" />
         </TouchableOpacity>
@@ -74,16 +65,16 @@ const Recommendations = () => {
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={recommendatoins}
+        data={hotels}
         ListFooterComponent={() => <View style={styles.separator} />}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
-        renderItem={({ item }) => <RecommendationListItem item={item} />}
+        renderItem={({ item }) => <HotelListItem item={item} />}
       />
     </View>
   );
 };
 
-export default Recommendations;
+export default NearbyHotels;
 
 const styles = StyleSheet.create({
   header: {
@@ -95,12 +86,13 @@ const styles = StyleSheet.create({
     padding: 8,
     alignItems: "stretch",
     justifyContent: "center",
-    flexDirection: "row",
+    flexDirection: "column",
     backgroundColor: "white",
     borderRadius: 8,
   },
   descriptionWrapper: {
-    flex: 1,
+    // flex: 1,
+    maxWidth: 140,
     alignItems: "flex-start",
     justifyContent: "space-between",
     paddingHorizontal: 8,
@@ -115,8 +107,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   image: {
-    height: 80,
-    width: 80,
+    // flex:1,
+    height: 120,
+    width: 140,
     borderRadius: 8,
   },
   title: {

@@ -2,8 +2,8 @@ const countries = [
   {
     id: 157,
     countryId: 1,
-    twoDigitCode: "AF",
-    name: "Afghanistan",
+    twoDigitCode: "CH",
+    name: "China",
     phoneCode: "93",
     flag: "\uD83C\uDDE6\uD83C\uDDEB",
     states:
@@ -14,8 +14,8 @@ const countries = [
   {
     id: 156,
     countryId: 2,
-    twoDigitCode: "AL",
-    name: "Albania",
+    twoDigitCode: "PR",
+    name: "Peru",
     phoneCode: "355",
     flag: "\uD83C\uDDE6\uD83C\uDDF1",
     states:
@@ -26,8 +26,8 @@ const countries = [
   {
     id: 1,
     countryId: 3,
-    twoDigitCode: "DZ",
-    name: "Algeria",
+    twoDigitCode: "IT",
+    name: "Italy",
     phoneCode: "213",
     flag: "\uD83C\uDDE9\uD83C\uDDFF",
     states:
@@ -38,8 +38,8 @@ const countries = [
   {
     id: 158,
     countryId: 4,
-    twoDigitCode: "AS",
-    name: "Samoa",
+    twoDigitCode: "EG",
+    name: "Egypt",
     phoneCode: "1684",
     flag: "\uD83C\uDDE6\uD83C\uDDF8",
     states: "",
@@ -50,8 +50,8 @@ const countries = [
   {
     id: 159,
     countryId: 5,
-    twoDigitCode: "AD",
-    name: "Andorra",
+    twoDigitCode: "IN",
+    name: "India",
     phoneCode: "376",
     flag: "\uD83C\uDDE6\uD83C\uDDE9",
     states:
