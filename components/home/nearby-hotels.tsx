@@ -17,7 +17,7 @@ const HotelListItem = ({ item }: { item: AppTypes.HotelType }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        router.push(AppRoutePath.hotels(item.id));
+        router.push(AppRoutePath.hotels.initial(item.id));
       }}
     >
       <View style={styles.container}>

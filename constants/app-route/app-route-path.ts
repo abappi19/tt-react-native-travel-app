@@ -1,6 +1,7 @@
 export const AppRoutePath = {
   initial: "/",
   tabs: {
+    initial: "/(tabs)",
     home: "/(tabs)/home",
   },
 
@@ -10,7 +11,12 @@ export const AppRoutePath = {
   places(id: number) {
     return `/places/${id}`;
   },
-  hotels(id: number) {
-    return `/hotels/${id}`;
+  hotels: {
+    initial(id: number) {
+      return `/hotels/${id}`;
+    },
+    selectRoom(id: number) {
+      return `/hotels/${id}/select-room`;
+    },
   },
 };

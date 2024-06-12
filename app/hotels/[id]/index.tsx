@@ -12,14 +12,14 @@ import {
 
 import hotels from "@/assets/data/hotels";
 import AppBar from "@/components/app-bar/app-bar";
+import Button from "@/components/button/button";
 import HotelMapView from "@/components/hotel/hotel-map-view";
 import ReviewListItem from "@/components/hotel/review-list-item";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import { Feather } from "@expo/vector-icons";
 import { Rating } from "react-native-ratings";
-import Button from "@/components/button/button";
 
-const PlaceDetails = () => {
+const HotelDetails = () => {
   const { id } = useLocalSearchParams();
   const hotel = useMemo(() => {
     return hotels.find((hotel) => hotel.id === Number(id));
@@ -33,8 +33,9 @@ const PlaceDetails = () => {
     router.back();
   };
 
-  const handleBestHotelsClick = () => {
-    router.push(AppRoutePath.nearbyHotels);
+  const handleSelectRoom = () => {
+    router.back();
+    router.push(AppRoutePath.hotels.selectRoom(Number(id)));
   };
 
   if (!hotel) return null;
@@ -129,13 +130,13 @@ const PlaceDetails = () => {
           <Text style={styles.title}>$200</Text>
           <Text style={styles.subtitle}>Jan 01 - Dec 25</Text>
         </View>
-        <Button title="Select Room" onPress={() => {}} />
+        <Button title="Select Room" onPress={handleSelectRoom} />
       </View>
     </>
   );
 };
 
-export default PlaceDetails;
+export default HotelDetails;
 
 const styles = StyleSheet.create({
   bottomBar: {
