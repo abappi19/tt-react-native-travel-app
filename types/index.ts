@@ -6,7 +6,7 @@ export namespace AppTypes {
     name: string;
     phoneCode: string;
     flag: string;
-    statesList: null;
+    description: string;
     image: any;
   };
 

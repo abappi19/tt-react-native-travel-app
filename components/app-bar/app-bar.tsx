@@ -1,19 +1,39 @@
 import SIZES from "@/constants/tokens/sizes";
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
 import SearchComponent from "../search/search-component";
 
 type AppBarType = {
   onSearch?: (text: string) => void;
-  title: string;
+  title?: string;
   onBackPressed?: () => void;
+  style?: StyleProp<ViewStyle>;
+  titleColor?: string;
 };
 
-const AppBar = ({ onSearch, title, onBackPressed }: AppBarType) => {
+const AppBar = ({
+  onSearch,
+  title = "",
+  onBackPressed,
+  style,
+  titleColor = "black",
+}: AppBarType) => {
   const [open, setOpen] = useState(false);
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        ...styles.container,
+        ...(style || ({} as any)),
+      }}
+    >
       {onBackPressed && (
         <TouchableOpacity onPress={onBackPressed}>
           <View
@@ -32,10 +52,14 @@ const AppBar = ({ onSearch, title, onBackPressed }: AppBarType) => {
           </View>
         </TouchableOpacity>
       )}
-      {open || <Text style={styles.title}>{title}</Text>}
-      {onSearch && (
-        <SearchComponent onSateChange={setOpen} onSearch={onSearch} />
+      {open || (
+        <Text style={[styles.title, { color: titleColor }]}>{title}</Text>
       )}
+      <View style={{ flex: 1 }}>
+        {onSearch && (
+          <SearchComponent onSateChange={setOpen} onSearch={onSearch} />
+        )}
+      </View>
     </View>
   );
 };
