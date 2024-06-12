@@ -19,20 +19,9 @@ const CountryListItem = ({ item }: { item: AppTypes.CountryType }) => {
         router.push(AppRoutePath.places(item.id));
       }}
     >
-      <View
-        style={{
-          padding: 4,
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-        }}
-      >
+      <View style={styles.container}>
         <Image
-          style={{
-            height: 80,
-            width: 80,
-            borderRadius: 8,
-          }}
+          style={styles.image}
           resizeMethod="resize"
           resizeMode="cover"
           source={item.image}
@@ -44,15 +33,35 @@ const CountryListItem = ({ item }: { item: AppTypes.CountryType }) => {
 };
 const Places = () => {
   return (
-    <FlatList
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      data={countries}
-      renderItem={({ item }) => <CountryListItem item={item} />}
-    />
+    <View style={{ paddingTop: 12 }}>
+      <Text style={styles.title}>Places</Text>
+      <FlatList
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        data={countries}
+        renderItem={({ item }) => <CountryListItem item={item} />}
+      />
+    </View>
   );
 };
 
 export default Places;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 4,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+  },
+  image: {
+    height: 80,
+    width: 80,
+    borderRadius: 8,
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 18,
+    paddingVertical: 4,
+  },
+});

@@ -1,4 +1,5 @@
 import Places from "@/components/home/places";
+import Recommendations from "@/components/home/recommendations";
 import OnboardingItemView from "@/components/onboarding/onboarding-item-view";
 import SearchComponent from "@/components/search/search-component";
 import SIZES from "@/constants/tokens/sizes";
@@ -64,16 +65,9 @@ export default function Index() {
           <Text>Hey User!</Text>
           <SearchComponent onSearch={handleSearch} />
         </View>
-        <Text
-          style={{
-            fontWeight: "bold",
-            fontSize: 18,
-            paddingVertical: 4,
-          }}
-        >
-          Places
-        </Text>
+
         <Places />
+        <Recommendations />
       </View>
     </SafeAreaView>
   );
