@@ -1,12 +1,22 @@
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useMemo } from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import hotels from "@/assets/data/hotels";
 import AppBar from "@/components/app-bar/app-bar";
-import { AppRoutePath } from "@/constants/app-route/app-route-path";
-import { Rating } from "react-native-ratings";
 import HotelMapView from "@/components/hotel/hotel-map-view";
+import ReviewListItem from "@/components/hotel/review-list-item";
+import { AppRoutePath } from "@/constants/app-route/app-route-path";
+import { Feather } from "@expo/vector-icons";
+import { Rating } from "react-native-ratings";
 
 const PlaceDetails = () => {
   const { id } = useLocalSearchParams();
@@ -44,45 +54,71 @@ const PlaceDetails = () => {
 
       <ScrollView>
         <View style={{ padding: 8 }}>
-          <Image style={styles.image} source={hotel?.image} />
-          <View style={styles.card}>
-            <Text style={styles.title} numberOfLines={1}>
-              {hotel?.name}
-            </Text>
-            <Text style={styles.subtitle}>{hotel?.location.name}</Text>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-                paddingTop: 16,
-              }}
-            >
-              <Rating
-                ratingBackgroundColor="#00000000"
-                style={{}}
-                type="star"
-                ratingCount={5}
-                startingValue={hotel?.rating}
-                imageSize={18}
-                // tintColor="#fff"
-                // ratingColor="#FF7D13"
-                readonly
-                // showRating
-                // onFinishRating={this.ratingCompleted}
-              />
-              <Text>{`(${hotel?.reviews})`}</Text>
-            </View>
-          </View>
           <View>
-            <Text style={[styles.title, { paddingVertical: 8 }]}>
-              Description
-            </Text>
-            <Text>{hotel?.description}</Text>
+            <Image style={styles.image} source={hotel?.image} />
+            <View style={styles.card}>
+              <Text style={styles.title} numberOfLines={1}>
+                {hotel?.name}
+              </Text>
+              <Text style={styles.subtitle}>{hotel?.location.name}</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  paddingTop: 16,
+                }}
+              >
+                <Rating
+                  ratingBackgroundColor="#00000000"
+                  style={{}}
+                  type="star"
+                  ratingCount={5}
+                  startingValue={hotel?.rating}
+                  imageSize={18}
+                  // tintColor="#fff"
+                  // ratingColor="#FF7D13"
+                  readonly
+                  // showRating
+                  // onFinishRating={this.ratingCompleted}
+                />
+                <Text>{`(${hotel?.reviews})`}</Text>
+              </View>
+            </View>
 
-            <Text style={[styles.title, { paddingVertical: 8 }]}>Location</Text>
+            <View style={{}}>
+              <Text style={[styles.title, { paddingVertical: 8 }]}>
+                Description
+              </Text>
+              <Text>{hotel?.description}</Text>
 
-            <HotelMapView hotelId={hotel?.id} location={hotel?.location} />
+              <Text style={[styles.title, { paddingVertical: 8 }]}>
+                Location
+              </Text>
+
+              <HotelMapView hotelId={hotel?.id} location={hotel?.location} />
+
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={[styles.header, { paddingVertical: 8 }]}>
+                  Reviews
+                </Text>
+                <TouchableOpacity onPress={() => {}}>
+                  <Feather name="list" size={24} color="black" />
+                </TouchableOpacity>
+              </View>
+              <FlatList
+                nestedScrollEnabled
+                data={hotel.reviewList}
+                ListFooterComponent={() => <View style={styles.footer} />}
+                ItemSeparatorComponent={() => <View style={styles.separator} />}
+                renderItem={ReviewListItem}
+              />
+            </View>
           </View>
         </View>
       </ScrollView>

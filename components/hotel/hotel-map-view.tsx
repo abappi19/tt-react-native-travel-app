@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import MapView, { Marker } from "react-native-maps";
+import { StyleSheet, Text, View } from "react-native";
+import MapView, { Marker, PROVIDER_GOOGLE, UrlTile } from "react-native-maps";
 
 type HotelMapViewProps = {
   hotelId: number;
@@ -17,12 +17,11 @@ const HotelMapView = ({ hotelId, location }: HotelMapViewProps) => {
     latitudeDelta: 0,
     longitudeDelta: 0,
   };
-  const url = `https://www.google.com/maps/place//@${location.lat},${location.long},15.3z`;
-
-  //https://www.google.com/maps/place//@23.7826914,90.4247793,15.3z
-  return <webview 
-  
-  />;
+  return (
+    <View>
+      <Text>map view not implemented</Text>
+    </View>
+  );
 };
 
 export default HotelMapView;
