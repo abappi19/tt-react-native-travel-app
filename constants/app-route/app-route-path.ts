@@ -3,6 +3,9 @@ export const AppRoutePath = {
   tabs: {
     initial: "/(tabs)",
     home: "/(tabs)/home",
+    location: "/(tabs)/location",
+    message: "/(tabs)/message",
+    profile: "/(tabs)/profile",
   },
 
   onboarding: "/onboarding",

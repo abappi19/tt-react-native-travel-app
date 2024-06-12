@@ -1,8 +1,8 @@
-import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 export default function OnboardingLayout() {
   return (
-    <Tabs initialRouteName="home">
+    <Tabs>
       <Tabs.Screen
         name="home"
         options={{
@@ -34,9 +34,7 @@ export default function OnboardingLayout() {
         options={{
           tabBarShowLabel: false,
           tabBarIcon(props) {
-            return (
-              <AntDesign size={24} name="message1" color={props.color} />
-            );
+            return <AntDesign size={24} name="message1" color={props.color} />;
           },
           headerShown: false,
         }}

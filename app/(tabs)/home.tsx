@@ -2,8 +2,6 @@ import AppBar from "@/components/app-bar/app-bar";
 import NearbyHotels from "@/components/home/nearby-hotels";
 import Places from "@/components/home/places";
 import Recommendations from "@/components/home/recommendations";
-import OnboardingItemView from "@/components/onboarding/onboarding-item-view";
-import SearchComponent from "@/components/search/search-component";
 import SIZES from "@/constants/tokens/sizes";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
@@ -13,7 +11,6 @@ import {
   NativeSyntheticEvent,
   SafeAreaView,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
 

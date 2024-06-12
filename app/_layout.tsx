@@ -4,7 +4,7 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack, usePathname } from "expo-router";
+import { Stack, router, usePathname } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { ReactNode, useCallback, useEffect, useState } from "react";
 import "react-native-reanimated";
@@ -59,8 +59,8 @@ export default function RootLayout() {
       return setMoveToScreen(AppRoutePath.onboarding);
     }
     if (pathName === "/") {
-      console.log("replacing to home route");
-      return setMoveToScreen(AppRoutePath.tabs.home);
+      console.log('replacing to home');
+      return setMoveToScreen(AppRoutePath.tabs.location);
     }
   }, []);
 
@@ -79,7 +79,7 @@ export default function RootLayout() {
     if (!moveToScreen) return;
     const ms = moveToScreen;
     setMoveToScreen(null);
-    // router.replace(ms);
+    router.replace(ms);
   }, [moveToScreen, isMounted, pathName]);
 
   useEffect(() => {
@@ -92,14 +92,14 @@ export default function RootLayout() {
     </ThemeProvider>
   );
 
-  // console.log(
-  //   "font loaded: ",
-  //   fontLoaded,
-  //   "isMounted: ",
-  //   isMounted,
-  //   "onboarded: ",
-  //   onboarded
-  // );
+  console.log(
+    "font loaded: ",
+    fontLoaded,
+    "isMounted: ",
+    isMounted,
+    "onboarded: ",
+    onboarded
+  );
 
   if (!fontLoaded) return null;
 
