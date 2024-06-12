@@ -39,7 +39,7 @@ const countries = [
     id: 158,
     countryId: 4,
     twoDigitCode: "AS",
-    name: "American Samoa",
+    name: "Samoa",
     phoneCode: "1684",
     flag: "\uD83C\uDDE6\uD83C\uDDF8",
     states: "",

@@ -17,5 +17,6 @@ export namespace AppTypes {
     rating: number;
     review: string;
     image: any;
+    location:string;
   };
 }

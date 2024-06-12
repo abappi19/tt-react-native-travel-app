@@ -6,6 +6,7 @@ const recommendations = [
     rating: 4.7,
     review: "112 reviews",
     image: require(`@/assets/images/recommendation/recommendation1.jpg`),
+    location: "China",
   },
   {
     id: 156,
@@ -14,6 +15,7 @@ const recommendations = [
     rating: 4.6,
     review: "150 reviews",
     image: require(`@/assets/images/recommendation/recommendation2.jpg`),
+    location: "Peru",
   },
   {
     id: 1,
@@ -22,6 +24,7 @@ const recommendations = [
     rating: 4.8,
     review: "98 reviews",
     image: require(`@/assets/images/recommendation/recommendation3.jpg`),
+    location: "Rome, Italy",
   },
   {
     id: 158,
@@ -30,6 +33,7 @@ const recommendations = [
     rating: 4.5,
     review: "200 reviews",
     image: require(`@/assets/images/recommendation/recommendation4.jpg`),
+    location: "Giza, Egypt",
   },
   {
     id: 159,
@@ -37,6 +41,7 @@ const recommendations = [
     name: "Taj Mahal",
     rating: 4.9,
     review: "180 reviews",
+    location: "Agra, India",
     image: require(`@/assets/images/recommendation/recommendation5.jpg`),
   },
 ];

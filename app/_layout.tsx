@@ -130,6 +130,7 @@ export default function RootLayout() {
         />
         <Stack.Screen name="places" options={{ headerShown: false }} />
         <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+        <Stack.Screen name="recommended" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProviderWrapper>

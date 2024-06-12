@@ -1,7 +1,8 @@
 import recommendatoins from "@/assets/data/recommendations";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import { AppTypes } from "@/types";
-import { router } from "expo-router";
+import { Feather } from "@expo/vector-icons";
+import { router, useRouter } from "expo-router";
 import React from "react";
 import {
   FlatList,
@@ -9,8 +10,13 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableOpacityBase,
   View,
 } from "react-native";
+
+
+
+
 
 const RecommendationListItem = ({
   item,
@@ -32,6 +38,7 @@ const RecommendationListItem = ({
         />
         <View style={styles.descriptionWrapper}>
           <Text style={styles.title}>{item.name}</Text>
+          <Text style={styles.subtitle}>{item.location}</Text>
           <View style={styles.rattingWrapper}>
             <Text style={styles.rating}> ★ {item.rating} </Text>
             <Text style={styles.review}>{` (${item.review}) `}</Text>
@@ -42,14 +49,35 @@ const RecommendationListItem = ({
   );
 };
 const Recommendations = () => {
+
+
+  const handleOnRecommendedIconPressed = () => {
+    router.push(AppRoutePath.recommended);
+  }
+
+
+
+
   return (
-    <View style={{ paddingTop: 12 }}>
-      <Text style={styles.header}>Recommendations</Text>
+    <View style={{ paddingTop: 22 }}>
+      <View
+        style={{
+          paddingHorizontal: 4,
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <Text style={styles.header}>Recommendations</Text>
+        <TouchableOpacity onPress={handleOnRecommendedIconPressed}>
+          <Feather name="list" size={24} color="black" />
+        </TouchableOpacity>
+      </View>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
         data={recommendatoins}
-        ItemSeparatorComponent={() => <View style={styles.separator}></View>}
+        ListFooterComponent={() => <View style={styles.separator} />}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
         renderItem={({ item }) => <RecommendationListItem item={item} />}
       />
     </View>
@@ -95,6 +123,10 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 18,
+  },
+  subtitle: {
+    fontSize: 14,
+    color: "#888",
   },
   review: {
     color: "#797979",

@@ -33,11 +33,13 @@ const CountryListItem = ({ item }: { item: AppTypes.CountryType }) => {
 };
 const Places = () => {
   return (
-    <View style={{ paddingTop: 12 }}>
+    <View style={{ paddingTop: 22 }}>
       <Text style={styles.title}>Places</Text>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
+        ListFooterComponent={() => <View style={styles.separator} />}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
         data={countries}
         renderItem={({ item }) => <CountryListItem item={item} />}
       />
@@ -49,7 +51,7 @@ export default Places;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 4,
+    // padding: 4,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
@@ -63,5 +65,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
     paddingVertical: 4,
+  },
+  separator: {
+    padding: 4,
   },
 });
