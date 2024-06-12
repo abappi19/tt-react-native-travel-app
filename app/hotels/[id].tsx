@@ -17,6 +17,7 @@ import ReviewListItem from "@/components/hotel/review-list-item";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import { Feather } from "@expo/vector-icons";
 import { Rating } from "react-native-ratings";
+import Button from "@/components/button/button";
 
 const PlaceDetails = () => {
   const { id } = useLocalSearchParams();
@@ -116,12 +117,20 @@ const PlaceDetails = () => {
                 data={hotel.reviewList}
                 ListFooterComponent={() => <View style={styles.footer} />}
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
+                ListHeaderComponent={() => <View style={styles.separator} />}
                 renderItem={ReviewListItem}
               />
             </View>
           </View>
         </View>
       </ScrollView>
+      <View style={styles.bottomBar}>
+        <View>
+          <Text style={styles.title}>$200</Text>
+          <Text style={styles.subtitle}>Jan 01 - Dec 25</Text>
+        </View>
+        <Button title="Select Room" onPress={() => {}} />
+      </View>
     </>
   );
 };
@@ -129,6 +138,17 @@ const PlaceDetails = () => {
 export default PlaceDetails;
 
 const styles = StyleSheet.create({
+  bottomBar: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "white",
+    padding: 12,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   image: {
     height: "auto",
     aspectRatio: 2,
@@ -166,14 +186,17 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   separator: {
-    padding: 4,
+    padding: 1,
+    backgroundColor: "#ddd",
   },
   header: {
+    flex: 1,
     fontWeight: "bold",
     fontSize: 18,
-    paddingVertical: 8,
   },
   footer: {
+    borderTopColor: "#ddd",
+    borderTopWidth: 1,
     padding: 56,
   },
 });

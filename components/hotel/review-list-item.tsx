@@ -39,15 +39,13 @@ const ReviewListItem = ({
             style={{
               flexDirection: "row",
               justifyContent: "flex-end",
-              gap: 5,
+              gap: 8,
             }}
           >
             <Text
-              style={{ color: "#ffad14", fontWeight: "bold", fontSize: 12 }}
-            >
-              ★{item.rating}
-            </Text>
-            <Text style={{ fontWeight: "bold", fontSize: 12 }}>
+              style={{ color: "#ffad14", fontWeight: "bold", fontSize: 14 }}
+            >{`★ ${item.rating} `}</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 14 }}>
               {item.reviewDate}
             </Text>
           </View>
