@@ -14,7 +14,7 @@ import hotels from "@/assets/data/hotels";
 import AppBar from "@/components/app-bar/app-bar";
 import Button from "@/components/button/button";
 import HotelMapView from "@/components/hotel/hotel-map-view";
-import ReviewListItem from "@/components/hotel/review-list-item";
+import ReviewListItem from "@/components/list-item/review-list-item";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import { Feather } from "@expo/vector-icons";
 import { Rating } from "react-native-ratings";
@@ -34,7 +34,7 @@ const HotelDetails = () => {
   };
 
   const handleSelectRoom = () => {
-    router.back();
+    // router.back();
     router.push(AppRoutePath.hotels.selectRoom(Number(id)));
   };
 

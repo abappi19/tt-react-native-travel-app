@@ -1,75 +1,149 @@
-import OnboardingItemView from "@/components/onboarding/onboarding-item-view";
-import SIZES from "@/constants/tokens/sizes";
-import { router } from "expo-router";
-import React, { useRef, useState } from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import React, { useMemo, useState } from "react";
 import {
   FlatList,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
+  Image,
+  ScrollView,
+  StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 
-export default function Index() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+import countries from "@/assets/data/countries";
+import recommendations from "@/assets/data/recommendations";
+import AppBar from "@/components/app-bar/app-bar";
+import Button from "@/components/button/button";
+import RecommendationListItem from "@/components/list-item/recommendation-list-item";
+import { AppRoutePath } from "@/constants/app-route/app-route-path";
+import SIZES from "@/constants/tokens/sizes";
+import { Feather } from "@expo/vector-icons";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-  const flatListRef = useRef<FlatList<any>>(null);
+const ProfileScreen = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const { top } = useSafeAreaInsets();
 
-  const slides = [
-    {
-      key: "1",
-      title: "Welcome to Our App",
-      description: "Discover new experiences and places with our app.",
-      image: require("@/assets/images/travel/travel1.jpg"),
-    },
-    {
-      key: "2",
-      title: "Plan Your Trips",
-      description: "Easily plan and organize your trips.",
-      image: require("@/assets/images/travel/travel2.jpg"),
-    },
-    {
-      key: "3",
-      title: "Stay Connected",
-      description: "Stay connected with your travel companions.",
-      image: require("@/assets/images/travel/travel3.jpg"),
-    },
-  ];
+  // useEffect(() => {
+  //   navigation.setOptions({ title: country?.name });
+  // }, [navigation, country]);
 
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const index = Math.round(event.nativeEvent.contentOffset.x / SIZES.width);
-    setCurrentIndex(index);
+  const handleBackPressed = () => {
+    router.back();
   };
 
-  const isLastSlide = currentIndex === slides.length - 1;
-
-  const handleNext = () => {
-    if (!isLastSlide) {
-      (flatListRef.current as any).scrollToIndex({ index: currentIndex + 1 });
-    } else {
-      router.replace("(tabs)");
-    }
+  const handleBestHotelsClick = () => {
+    router.push(AppRoutePath.nearbyHotels);
   };
 
   return (
-    <FlatList
-      style={{
-        height: "100%",
-      }}
-      ref={flatListRef}
-      data={slides}
-      horizontal
-      pagingEnabled
-      showsHorizontalScrollIndicator={false}
-      onScroll={handleScroll}
-      keyExtractor={(item) => item.key}
-      renderItem={({ item }) => (
-        <OnboardingItemView
-          item={item}
-          isEnd={isLastSlide}
-          onButtonClick={handleNext}
+    <>
+      <ScrollView
+        onScroll={(e) => {
+          // console.log(e.nativeEvent.contentOffset.y);
+          setScrolled(e.nativeEvent.contentOffset.y > 200);
+        }}
+      >
+        <View>
+          <Image
+            style={styles.image}
+            source={require("@/assets/images/hotel/hotel2.jpg")}
+          />
+          <View style={{ padding: 8 }}>
+            {/* <Text style={styles.title}>{country?.name}</Text>
+            <Text style={styles.description}>{country?.description}</Text> */}
+
+            <View
+              style={{
+                paddingHorizontal: 4,
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <Text style={styles.header}>Popular Destinations</Text>
+              <TouchableOpacity onPress={() => {}}>
+                <Feather name="list" size={24} color="black" />
+              </TouchableOpacity>
+            </View>
+            <FlatList
+              nestedScrollEnabled
+              showsHorizontalScrollIndicator={false}
+              data={recommendations}
+              ListFooterComponent={() => <View style={styles.footer} />}
+              ItemSeparatorComponent={() => <View style={styles.separator} />}
+              renderItem={({ item }) => <RecommendationListItem item={item} />}
+            />
+          </View>
+        </View>
+      </ScrollView>
+
+      <AppBar
+        style={{
+          position: "absolute",
+          zIndex: 999,
+          top: 0,
+          left: 0,
+          right: 0,
+          paddingTop: top,
+          height: top + 48,
+          backgroundColor: scrolled ? "#00000083" : "transparent",
+        }}
+        title={"Profile"}
+        titleColor="white"
+        // onBackPressed={router.canGoBack() ? handleBackPressed : undefined}
+        onSearch={() => {}}
+      />
+
+      {/* <View
+        style={{
+          position: "absolute",
+          zIndex: 999,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          // height: 48,
+          // backgroundColor: "white",
+        }}
+      >
+        <Button
+          style={{ margin: 8 }}
+          title="Find Best Hotels"
+          onPress={handleBestHotelsClick}
         />
-      )}
-    />
+      </View> */}
+    </>
   );
-}
+};
+
+export default ProfileScreen;
+
+const getMinimumSize = () => Math.min(SIZES.width, SIZES.height);
+
+const styles = StyleSheet.create({
+  image: {
+    height: getMinimumSize(),
+    width: getMinimumSize(),
+    // borderRadius: 12,
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 24,
+    paddingVertical: 16,
+  },
+  description: {
+    // fontWeight: "bold",
+    // fontSize: 24,
+    paddingVertical: 16,
+  },
+  separator: {
+    padding: 4,
+  },
+  header: {
+    fontWeight: "bold",
+    fontSize: 18,
+    paddingVertical: 8,
+  },
+  footer: {
+    padding: 56,
+  },
+});

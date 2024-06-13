@@ -1,7 +1,10 @@
 export const AppRoutePath = {
   initial: "/",
+  search: {
+    normalSearch: "/(search)/normal-search",
+    hotelSearch: "/(search)/hotel-search",
+  },
   tabs: {
-    initial: "/(tabs)",
     home: "/(tabs)/home",
     location: "/(tabs)/location",
     message: "/(tabs)/message",

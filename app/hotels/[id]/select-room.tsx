@@ -9,13 +9,17 @@ const SelectRoom = () => {
   const { id } = useLocalSearchParams();
 
   const handleBackPressed = () => {
-    if (router.canGoBack()) router.back();
-    router.push(AppRoutePath.hotels.initial(Number(id)));
+    // if (router.canGoBack())
+    router.back();
+    // router.push(AppRoutePath.hotels.initial(Number(id)));
   };
   return (
     <SafeAreaView>
       <View>
-        <AppBar onBackPressed={handleBackPressed} title="Select Room" />
+        <AppBar
+          onBackPressed={router.canGoBack() ? handleBackPressed : undefined}
+          title="Select Room"
+        />
         <Text>Select Room</Text>
       </View>
     </SafeAreaView>

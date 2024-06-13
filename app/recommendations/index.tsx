@@ -1,10 +1,10 @@
+import recommendatoins from "@/assets/data/recommendations";
 import AppBar from "@/components/app-bar/app-bar";
+import RecommendationListItem from "@/components/list-item/recommendation-list-item";
 import { router } from "expo-router";
 import React, { useMemo, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import recommendatoins from "@/assets/data/recommendations";
-import RecommendationListItem from "@/components/recommendations/recommendation-list-item";
 
 export default function OnboardingScreen() {
   const [search, setSearch] = useState("");

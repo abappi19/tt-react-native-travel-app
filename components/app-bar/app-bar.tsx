@@ -17,6 +17,7 @@ type AppBarType = {
   onBackPressed?: () => void;
   style?: StyleProp<ViewStyle>;
   titleColor?: string;
+  onSearchClick?: () => void;
 };
 
 const AppBar = ({
@@ -25,6 +26,7 @@ const AppBar = ({
   onBackPressed,
   style,
   titleColor = "black",
+  onSearchClick,
 }: AppBarType) => {
   const [open, setOpen] = useState(false);
   return (
@@ -55,10 +57,15 @@ const AppBar = ({
       {open || (
         <Text style={[styles.title, { color: titleColor }]}>{title}</Text>
       )}
-      <View style={{ flex: 1 }}>
-        {onSearch && (
-          <SearchComponent onSateChange={setOpen} onSearch={onSearch} />
-        )}
+      <View style={{ flex: open ? 1 : 0 }}>
+        {
+          <SearchComponent
+            visible={!!onSearch || !!onSearchClick}
+            onSateChange={setOpen}
+            onSearch={onSearch}
+            onSearchClick={onSearchClick}
+          />
+        }
       </View>
     </View>
   );

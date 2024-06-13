@@ -2,6 +2,7 @@ import AppBar from "@/components/app-bar/app-bar";
 import NearbyHotels from "@/components/home/nearby-hotels";
 import Places from "@/components/home/places";
 import Recommendations from "@/components/home/recommendations";
+import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import SIZES from "@/constants/tokens/sizes";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
@@ -55,7 +56,9 @@ export default function Index() {
     }
   };
 
-  const handleSearch = (text: string) => {};
+  const handleSearchClick = () => {
+    router.push(AppRoutePath.search.normalSearch);
+  };
 
   return (
     <SafeAreaView>
@@ -63,6 +66,7 @@ export default function Index() {
         <AppBar
           title="Hey User!"
           // onSearch={handleSearch}
+          onSearchClick={handleSearchClick}
         />
 
         <Places />

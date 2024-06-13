@@ -1,3 +1,5 @@
+import { router, useLocalSearchParams } from "expo-router";
+import React, { useMemo, useState } from "react";
 import {
   FlatList,
   Image,
@@ -7,24 +9,16 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect, useMemo, useState } from "react";
-import {
-  router,
-  useFocusEffect,
-  useLocalSearchParams,
-  useNavigation,
-} from "expo-router";
 
 import countries from "@/assets/data/countries";
-import SIZES from "@/constants/tokens/sizes";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Recommendations from "@/components/home/recommendations";
-import AppBar from "@/components/app-bar/app-bar";
 import recommendations from "@/assets/data/recommendations";
-import RecommendationListItem from "@/components/recommendations/recommendation-list-item";
-import { Feather } from "@expo/vector-icons";
+import AppBar from "@/components/app-bar/app-bar";
 import Button from "@/components/button/button";
+import RecommendationListItem from "@/components/list-item/recommendation-list-item";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
+import SIZES from "@/constants/tokens/sizes";
+import { Feather } from "@expo/vector-icons";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const PlaceDetails = () => {
   const { id } = useLocalSearchParams();
