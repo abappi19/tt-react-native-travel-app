@@ -1,38 +1,99 @@
+import { AppRoutePath } from "@/constants/app-route/app-route-path";
+import { useFonts } from "expo-font";
+import { Redirect, SplashScreen, router, usePathname } from "expo-router";
+import React, { useCallback, useEffect, useState } from "react";
 import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
-import { Stack } from "expo-router";
-import { ReactNode } from "react";
-import "react-native-reanimated";
+  ActivityIndicator,
+  StyleSheet,
+  View,
+  useColorScheme,
+} from "react-native";
+import { match } from "ts-pattern";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { useThemeColor } from "@/hooks/useThemeColor";
-import { View } from "react-native";
+// LogBox.ignoreAllLogs();
 
-export default function Index() {
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
 
-  const statusBackground = useThemeColor({}, "background");
+const hideSplashScreen = async () => {
+  try {
+    const hideSplash = setTimeout(() => {
+      SplashScreen.hideAsync();
+    }, 2000);
 
-  return (
-    <View style={{ flex: 1 }}>
-      <Stack>
-        <Stack.Screen
-          name="(tabs)"
-          options={{
-            headerShown: false,
-            statusBarTranslucent: false,
-            statusBarColor: statusBackground,
-          }}
-        />
-        <Stack.Screen name="places" options={{ headerShown: false }} />
-        <Stack.Screen name="hotels" options={{ headerShown: false }} />
-        <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-        <Stack.Screen name="recommendations" options={{ headerShown: false }} />
-        <Stack.Screen name="nearby-hotels" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </View>
-  );
-}
+    return () => {
+      clearTimeout(hideSplash);
+    };
+  } catch (error) {
+    console.log("Error hiding splash screen:", error);
+  }
+};
+
+const Index = () => {
+  const [isMounted, setIsMounted] = useState(false);
+  const [moveToScreen, setMoveToScreen] = useState<null | string>(null);
+
+  const colorScheme = useColorScheme();
+  const pathName = usePathname();
+
+  const [fontLoaded] = useFonts({
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+  });
+
+  const onboarded = true;
+
+  const handleRouting = useCallback(() => {
+    console.log("handle routing called");
+    if (!onboarded) {
+      return setMoveToScreen(AppRoutePath.onboarding);
+    }
+    if (pathName === "/") {
+      //   return setMoveToScreen(AppRoutePath.tabs.location);
+    }
+  }, []);
+
+  const onLaunch = useCallback(async () => {
+    console.log("on launch called");
+    if (fontLoaded) {
+      await hideSplashScreen();
+      handleRouting();
+      setIsMounted(true);
+    }
+  }, [fontLoaded]);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
+    if (!moveToScreen) return;
+    const ms = moveToScreen;
+    setMoveToScreen(null);
+    router.replace(ms);
+  }, [moveToScreen, isMounted, pathName]);
+
+  useEffect(() => {
+    onLaunch();
+  }, [onLaunch]);
+
+  return match(isMounted)
+    .with(false, () => (
+      <View
+        style={{
+          height: "100%",
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <ActivityIndicator size={32} />
+      </View>
+    ))
+    .otherwise(() =>
+      match(moveToScreen)
+        .with(null, () => <Redirect href={AppRoutePath.tabs.home} />)
+        .otherwise(() => <Redirect href={moveToScreen as string} />)
+    );
+};
+
+export default Index;
+
+const styles = StyleSheet.create({});

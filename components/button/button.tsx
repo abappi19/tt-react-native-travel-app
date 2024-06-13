@@ -7,7 +7,7 @@ import {
   ViewStyle,
 } from "react-native";
 import React, { ReactNode } from "react";
-import { useThemeColor } from "@/hooks/useThemeColor";
+import { Colors } from "@/constants/tokens/colors";
 
 const Button = ({
   onPress,
@@ -20,10 +20,9 @@ const Button = ({
   title?: string;
   style?: StyleProp<ViewStyle>;
 }) => {
-  const tintColor = useThemeColor({}, "tint");
   return (
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: tintColor }, style]}
+      style={[styles.button, { backgroundColor: Colors.light.tint }, style]}
       onPress={onPress}
     >
       {children ? children : <Text style={styles.buttonText}>{title}</Text>}

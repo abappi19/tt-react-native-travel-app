@@ -1,7 +1,6 @@
 import { Colors } from "@/constants/tokens/colors";
 import SIZES from "@/constants/tokens/sizes";
 import { useColorScheme } from "@/hooks/useColorScheme.web";
-import { useThemeColor } from "@/hooks/useThemeColor";
 import {
   ImageBackground,
   StyleSheet,
@@ -24,7 +23,6 @@ export default function OnboardingItemView({
   isEnd: boolean;
   onButtonClick:()=>void;
 }) {
-  const tintColor = useThemeColor({}, "tint");
 
   return (
     <ImageBackground
@@ -47,7 +45,7 @@ export default function OnboardingItemView({
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.description}>{item.description}</Text>
           <TouchableOpacity
-            style={[styles.button, { backgroundColor: tintColor }]}
+            style={[styles.button, { backgroundColor: Colors.light.tint }]}
             onPress={onButtonClick}
           >
             <Text style={styles.buttonText}>{isEnd ? "Finish" : "Next"}</Text>
