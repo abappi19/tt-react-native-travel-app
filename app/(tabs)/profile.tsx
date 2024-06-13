@@ -1,32 +1,20 @@
-import { router, useLocalSearchParams } from "expo-router";
-import React, { useMemo, useState } from "react";
-import {
-  FlatList,
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { router } from "expo-router";
+import React, { useState } from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
 
-import countries from "@/assets/data/countries";
-import recommendations from "@/assets/data/recommendations";
 import AppBar from "@/components/app-bar/app-bar";
-import Button from "@/components/button/button";
-import RecommendationListItem from "@/components/list-item/recommendation-list-item";
+import Bookings from "@/components/profile/tabs/bookings";
+import Info from "@/components/profile/tabs/info";
+import Trips from "@/components/profile/tabs/trips";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
+import { Colors } from "@/constants/tokens/colors";
 import SIZES from "@/constants/tokens/sizes";
-import { Feather } from "@expo/vector-icons";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const ProfileScreen = () => {
   const [scrolled, setScrolled] = useState(false);
   const { top } = useSafeAreaInsets();
-
-  // useEffect(() => {
-  //   navigation.setOptions({ title: country?.name });
-  // }, [navigation, country]);
 
   const handleBackPressed = () => {
     router.back();
@@ -36,46 +24,48 @@ const ProfileScreen = () => {
     router.push(AppRoutePath.nearbyHotels);
   };
 
+  const Tab = createMaterialTopTabNavigator();
   return (
     <>
-      <ScrollView
+      {/* <ScrollView
         onScroll={(e) => {
           // console.log(e.nativeEvent.contentOffset.y);
           setScrolled(e.nativeEvent.contentOffset.y > 200);
         }}
+      > */}
+      <View
+        style={{
+          position: "relative",
+          height: getMinimumSize() * 0.6,
+          width: getMinimumSize(),
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        <View>
-          <Image
-            style={styles.image}
-            source={require("@/assets/images/hotel/hotel2.jpg")}
-          />
-          <View style={{ padding: 8 }}>
-            {/* <Text style={styles.title}>{country?.name}</Text>
-            <Text style={styles.description}>{country?.description}</Text> */}
+        <Image
+          style={styles.image}
+          source={require("@/assets/images/hotel/hotel2.jpg")}
+        />
 
-            <View
-              style={{
-                paddingHorizontal: 4,
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <Text style={styles.header}>Popular Destinations</Text>
-              <TouchableOpacity onPress={() => {}}>
-                <Feather name="list" size={24} color="black" />
-              </TouchableOpacity>
-            </View>
-            <FlatList
-              nestedScrollEnabled
-              showsHorizontalScrollIndicator={false}
-              data={recommendations}
-              ListFooterComponent={() => <View style={styles.footer} />}
-              ItemSeparatorComponent={() => <View style={styles.separator} />}
-              renderItem={({ item }) => <RecommendationListItem item={item} />}
-            />
-          </View>
-        </View>
-      </ScrollView>
+        <Image
+          style={styles.profileImage}
+          source={{
+            uri: "https://th.bing.com/th/id/R.cbe9c6caa4f9030112f28aa9df8e33e2?rik=zz8Nd6%2f5sOoypA&pid=ImgRaw&r=0",
+          }}
+        />
+
+        <Text style={styles.username}>King Andree</Text>
+        <Text style={styles.userEmail}>king.andree@email.com</Text>
+      </View>
+      {/* </ScrollView> */}
+
+      <View style={{ flex: 1 }}>
+        <Tab.Navigator style={{ flex: 1 }}>
+          <Tab.Screen name="Bookings" component={Bookings} />
+          <Tab.Screen name="Trips" component={Trips} />
+          <Tab.Screen name="Info" component={Info} />
+        </Tab.Navigator>
+      </View>
 
       <AppBar
         style={{
@@ -120,9 +110,42 @@ export default ProfileScreen;
 const getMinimumSize = () => Math.min(SIZES.width, SIZES.height);
 
 const styles = StyleSheet.create({
+  username: {
+    backgroundColor: "#00000071",
+    color: "white",
+    paddingVertical: 2,
+    paddingHorizontal: 8,
+    borderRadius: 8,
+    marginTop: 4,
+    fontWeight: "bold",
+    fontSize: 16,
+    textShadowColor: "#000",
+    textShadowRadius: 5,
+  },
+
+  userEmail: {
+    backgroundColor: Colors.light.tint,
+    color: "white",
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 8,
+    marginTop: 4,
+    // fontWeight: "bold",
+    fontSize: 16,
+  },
+  profileImage: {
+    height: 100,
+    width: 100,
+    borderColor: "#dddddd83",
+    borderWidth: 2,
+    borderRadius: 50,
+    alignSelf: "center",
+  },
   image: {
-    height: getMinimumSize(),
-    width: getMinimumSize(),
+    height: "100%",
+    width: "100%",
+    position: "absolute",
+    top: 0,
     // borderRadius: 12,
   },
   title: {
