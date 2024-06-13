@@ -38,6 +38,10 @@ const HotelDetails = () => {
     router.push(AppRoutePath.hotels.selectRoom(Number(id)));
   };
 
+  const handleOnReviewsButtonClick = () => {
+    router.push(AppRoutePath.hotels.reviews(Number(id)));
+  };
+
   if (!hotel) return null;
 
   return (
@@ -109,7 +113,7 @@ const HotelDetails = () => {
                 <Text style={[styles.header, { paddingVertical: 8 }]}>
                   Reviews
                 </Text>
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity onPress={handleOnReviewsButtonClick}>
                   <Feather name="list" size={24} color="black" />
                 </TouchableOpacity>
               </View>

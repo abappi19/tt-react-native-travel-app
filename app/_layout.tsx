@@ -76,6 +76,11 @@ const RootLayout = () => {
           statusBarStyle: "dark",
         }}
       />
+
+      <Stack.Screen
+        name="(authentication)"
+        options={{ headerShown: false, statusBarStyle: "dark" }}
+      />
       <Stack.Screen
         name="(search)"
         options={{

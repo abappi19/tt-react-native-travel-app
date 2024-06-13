@@ -4,6 +4,7 @@ import Places from "@/components/home/places";
 import Recommendations from "@/components/home/recommendations";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import SIZES from "@/constants/tokens/sizes";
+import { Utils } from "@/utils/utils";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
 import {
@@ -64,7 +65,7 @@ export default function Index() {
     <SafeAreaView>
       <View>
         <AppBar
-          title="Hey User!"
+          title={`${Utils.getIsNight() ? "🌙" : "☀️"}  ${"User!"}`}
           // onSearch={handleSearch}
           onSearchClick={handleSearchClick}
         />

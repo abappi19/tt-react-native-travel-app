@@ -10,6 +10,13 @@ export namespace AppTypes {
     image: any;
   };
 
+  export type UserType = {
+    email: string;
+    password: string;
+    name: string;
+    profileIcon: string;
+  };
+
   export type RecommendationType = {
     id: number;
     countryId: number;
@@ -19,6 +26,13 @@ export namespace AppTypes {
     image: any;
     location: string;
   };
+
+  export type BookingType = {
+    hotel:HotelType;
+    bookingDate: string;
+    expireDate:string;
+    
+  }
 
   export type HotelType = {
     id: number;

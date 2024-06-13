@@ -11,20 +11,19 @@ import { Colors } from "@/constants/tokens/colors";
 import SIZES from "@/constants/tokens/sizes";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useUser } from "@/store/user";
+import ProfileGuestComponent from "@/components/profile/profile-guest-component";
 
 const ProfileScreen = () => {
-  const [scrolled, setScrolled] = useState(false);
+  // "https://th.bing.com/th/id/R.cbe9c6caa4f9030112f28aa9df8e33e2?rik=zz8Nd6%2f5sOoypA&pid=ImgRaw&r=0"
   const { top } = useSafeAreaInsets();
 
-  const handleBackPressed = () => {
-    router.back();
-  };
-
-  const handleBestHotelsClick = () => {
-    router.push(AppRoutePath.nearbyHotels);
-  };
+  const { user } = useUser();
 
   const Tab = createMaterialTopTabNavigator();
+
+  if (!user) return <ProfileGuestComponent />;
+
   return (
     <>
       {/* <ScrollView
@@ -50,12 +49,12 @@ const ProfileScreen = () => {
         <Image
           style={styles.profileImage}
           source={{
-            uri: "https://th.bing.com/th/id/R.cbe9c6caa4f9030112f28aa9df8e33e2?rik=zz8Nd6%2f5sOoypA&pid=ImgRaw&r=0",
+            uri: user?.profileIcon,
           }}
         />
 
-        <Text style={styles.username}>King Andree</Text>
-        <Text style={styles.userEmail}>king.andree@email.com</Text>
+        <Text style={styles.username}>{user?.name}</Text>
+        <Text style={styles.userEmail}>{user?.email}</Text>
       </View>
       {/* </ScrollView> */}
 
@@ -76,7 +75,7 @@ const ProfileScreen = () => {
           right: 0,
           paddingTop: top,
           height: top + 48,
-          backgroundColor: scrolled ? "#00000083" : "transparent",
+          backgroundColor: "transparent",
         }}
         title={"Profile"}
         titleColor="white"
@@ -115,7 +114,7 @@ const styles = StyleSheet.create({
     color: "white",
     paddingVertical: 2,
     paddingHorizontal: 8,
-    borderRadius: 8,
+    borderRadius: 16,
     marginTop: 4,
     fontWeight: "bold",
     fontSize: 16,
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
     color: "white",
     paddingVertical: 4,
     paddingHorizontal: 8,
-    borderRadius: 8,
+    borderRadius: 16,
     marginTop: 4,
     // fontWeight: "bold",
     fontSize: 16,

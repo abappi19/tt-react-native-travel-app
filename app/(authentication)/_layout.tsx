@@ -4,21 +4,14 @@ export default function PlacesLayout() {
   return (
     <Stack>
       <Stack.Screen
-        name="index"
+        name="signin"
         options={{
           headerShown: false,
           // statusBarTranslucent: true,
         }}
       />
       <Stack.Screen
-        name="select-room"
-        options={{
-          headerShown: false,
-          // statusBarTranslucent: true,
-        }}
-      />
-      <Stack.Screen
-        name="reviews"
+        name="register"
         options={{
           headerShown: false,
           // statusBarTranslucent: true,
