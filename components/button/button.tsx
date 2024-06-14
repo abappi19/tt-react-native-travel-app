@@ -8,24 +8,33 @@ import {
 } from "react-native";
 import React, { ReactNode } from "react";
 import { Colors } from "@/constants/tokens/colors";
+import { match } from "ts-pattern";
 
 const Button = ({
   onPress,
   children,
   title,
   style,
+  isLoading = false,
 }: {
   onPress: () => void;
   children?: ReactNode;
   title?: string;
   style?: StyleProp<ViewStyle>;
+  isLoading?: boolean;
 }) => {
   return (
     <TouchableOpacity
       style={[styles.button, { backgroundColor: Colors.light.tint }, style]}
       onPress={onPress}
     >
-      {children ? children : <Text style={styles.buttonText}>{title}</Text>}
+      {match(isLoading)
+        .with(true, () => null)
+        .otherwise(() =>
+          match(!!children)
+            .with(true, () => children)
+            .otherwise(() => <Text style={styles.buttonText}>{title}</Text>)
+        )}
     </TouchableOpacity>
   );
 };

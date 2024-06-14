@@ -23,6 +23,15 @@ function getIsNight() {
 //     }
 //   }
 
+function sleep(ms: number) {
+  return new Promise((res) => {
+    setTimeout(() => {
+      res(null);
+    }, ms);
+  });
+}
+
 export const Utils = {
   getIsNight,
+  sleep
 };

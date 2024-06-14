@@ -1,6 +1,5 @@
 import { Colors } from "@/constants/tokens/colors";
 import SIZES from "@/constants/tokens/sizes";
-import { useColorScheme } from "@/hooks/useColorScheme.web";
 import {
   ImageBackground,
   StyleSheet,

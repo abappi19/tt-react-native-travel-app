@@ -11,7 +11,7 @@ import { Colors } from "@/constants/tokens/colors";
 import SIZES from "@/constants/tokens/sizes";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useUser } from "@/store/user";
+import { useUser } from "@/library/store/user";
 import ProfileGuestComponent from "@/components/profile/profile-guest-component";
 
 const ProfileScreen = () => {

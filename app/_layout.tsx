@@ -1,5 +1,10 @@
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import { Colors } from "@/constants/tokens/colors";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack, usePathname } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -37,6 +42,8 @@ const App = () => {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
+  const client = new QueryClient();
+
   const onLaunch = useCallback(() => {
     if (fontLoaded) {
       return hideSplashScreen();
@@ -48,13 +55,15 @@ const App = () => {
   }, [onLaunch]);
 
   return (
-    <SafeAreaProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <RootLayout />
+    <QueryClientProvider client={client}>
+      <SafeAreaProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <RootLayout />
 
-        <StatusBar style="light" />
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
+          <StatusBar style="light" />
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
+    </QueryClientProvider>
   );
 };
 

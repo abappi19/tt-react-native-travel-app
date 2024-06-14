@@ -10,7 +10,7 @@ import { Alert, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import HookformTextInput from "@/components/input/hookform-text-input";
 import * as z from "zod";
-import { useServiceAuthRegister } from "@/service/auth.service";
+import { useServiceAuthRegister } from "@/library/service/auth.service";
 
 const Register = () => {
   const registerService = useServiceAuthRegister();
@@ -67,6 +67,7 @@ const Register = () => {
             style={{ width: "100%", padding: 8 }}
             title="REGISTER"
             onPress={registerService.onSubmit}
+            isLoading={registerService.isLoading}
           />
           {/* </View> */}
         </View>

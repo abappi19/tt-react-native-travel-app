@@ -1,4 +1,30 @@
+export namespace ServerResponseTypes  {
+  export type TApiResponse<T> = {
+    nonce: number;
+    status: number;
+    message: string;
+    payload: T;
+  };
+
+  interface IErrorField {
+    field: string;
+    message: string;
+  }
+
+  export interface IErrorError {
+    fields: IErrorField[];
+    systems: string;
+  }
+
+  export interface IError {
+    status: number;
+    message: string;
+    error: IErrorError;
+  }
+
+}
 export namespace AppTypes {
+  
   export type CountryType = {
     id: number;
     countryId: number;
@@ -11,10 +37,10 @@ export namespace AppTypes {
   };
 
   export type UserType = {
+    name: string;
     email: string;
     password: string;
-    name: string;
-    profileIcon: string;
+    profileIcon?: string;
   };
 
   export type RecommendationType = {
@@ -28,11 +54,10 @@ export namespace AppTypes {
   };
 
   export type BookingType = {
-    hotel:HotelType;
+    hotel: HotelType;
     bookingDate: string;
-    expireDate:string;
-    
-  }
+    expireDate: string;
+  };
 
   export type HotelType = {
     id: number;
