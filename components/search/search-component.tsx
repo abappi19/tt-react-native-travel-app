@@ -8,6 +8,7 @@ type SearchComponentProps = {
   onSearch?: (text: string) => void;
   onSateChange: (open: boolean) => void;
   onSearchClick?: () => void;
+  searchIcon?: any;
 };
 
 export default function SearchComponent({
@@ -15,6 +16,7 @@ export default function SearchComponent({
   onSateChange,
   onSearchClick,
   visible = true,
+  searchIcon,
 }: SearchComponentProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [expanded, setExpanded] = useState(false);
@@ -79,11 +81,13 @@ export default function SearchComponent({
             )
             .otherwise(() => () => {})}
         >
-          <AntDesign
-            name={expanded ? "close" : "search1"}
-            size={18}
-            color="black"
-          />
+          {searchIcon || (
+            <AntDesign
+              name={expanded ? "close" : "search1"}
+              size={18}
+              color="black"
+            />
+          )}
         </TouchableOpacity>
       </View>
     </View>

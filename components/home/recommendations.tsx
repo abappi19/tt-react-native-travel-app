@@ -1,4 +1,4 @@
-import recommendatoins from "@/assets/data/recommendations";
+import places from "@/assets/data/places";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import { AppTypes } from "@/types";
 import { Feather } from "@expo/vector-icons";
@@ -13,49 +13,12 @@ import {
   TouchableOpacityBase,
   View,
 } from "react-native";
+import RecommendationListItem from "../list-item/recommendation-list-item";
 
-
-
-
-
-const RecommendationListItem = ({
-  item,
-}: {
-  item: AppTypes.RecommendationType;
-}) => {
-  return (
-    <TouchableOpacity
-      onPress={() => {
-        router.push(AppRoutePath.places(item.id));
-      }}
-    >
-      <View style={styles.container}>
-        <Image
-          style={styles.image}
-          resizeMethod="resize"
-          resizeMode="cover"
-          source={item.image}
-        />
-        <View style={styles.descriptionWrapper}>
-          <Text style={styles.title}>{item.name}</Text>
-          <Text style={styles.subtitle}>{item.location}</Text>
-          <View style={styles.rattingWrapper}>
-            <Text style={styles.rating}> ★ {item.rating} </Text>
-            <Text style={styles.review}>{` (${item.review}) `}</Text>
-          </View>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-};
 const Recommendations = () => {
-
-
   const handleOnRecommendedIconPressed = () => {
-    router.push(AppRoutePath.recommendations);
-  }
-
-
+    router.push(AppRoutePath.recommendations.initial);
+  };
 
   return (
     <View style={{ paddingTop: 22 }}>
@@ -74,7 +37,7 @@ const Recommendations = () => {
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={recommendatoins}
+        data={places}
         ListFooterComponent={() => <View style={styles.separator} />}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         renderItem={({ item }) => <RecommendationListItem item={item} />}

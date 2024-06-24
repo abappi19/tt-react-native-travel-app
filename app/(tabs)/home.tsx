@@ -68,7 +68,9 @@ export default function Index() {
     <SafeAreaView>
       <View>
         <AppBar
-          title={`${Utils.getIsNight() ? "🌙" : "☀️"}  ${user?.name}`}
+          title={`${Utils.getIsNight() ? "🌙" : "☀️"}  ${
+            user?.name ?? "User!"
+          }`}
           // onSearch={handleSearch}
           onSearchClick={handleSearchClick}
         />

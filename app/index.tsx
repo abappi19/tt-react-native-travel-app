@@ -12,7 +12,8 @@ const Index = () => {
 
   const pathName = usePathname();
 
-  const onboarded = true;
+  const onboarded = false;
+
   const handleRouting = useCallback(() => {
     console.log("handle routing called");
     if (!onboarded) {

@@ -5,7 +5,6 @@ import AppBar from "@/components/app-bar/app-bar";
 import { router, useLocalSearchParams } from "expo-router";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import RecommendationListItem from "@/components/list-item/recommendation-list-item";
-import recommendations from "@/assets/data/recommendations";
 import rooms from "@/assets/data/rooms";
 import RoomListItem from "@/components/list-item/room-list-item";
 import hotels from "@/assets/data/hotels";

@@ -1,24 +1,24 @@
-import { router } from "expo-router";
-import React, { useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Alert, Image, StyleSheet, Text, View } from "react-native";
+import { match } from "ts-pattern";
 
 import AppBar from "@/components/app-bar/app-bar";
+import ProfileGuestComponent from "@/components/profile/profile-guest-component";
 import Bookings from "@/components/profile/tabs/bookings";
 import Info from "@/components/profile/tabs/info";
 import Trips from "@/components/profile/tabs/trips";
-import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import { Colors } from "@/constants/tokens/colors";
 import SIZES from "@/constants/tokens/sizes";
+import { useStoreUser } from "@/library/store/user";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useStoreUser } from "@/library/store/user";
-import ProfileGuestComponent from "@/components/profile/profile-guest-component";
+import { AntDesign } from "@expo/vector-icons";
 
 const ProfileScreen = () => {
   // "https://th.bing.com/th/id/R.cbe9c6caa4f9030112f28aa9df8e33e2?rik=zz8Nd6%2f5sOoypA&pid=ImgRaw&r=0"
   const { top } = useSafeAreaInsets();
 
-  const { user } = useStoreUser();
+  const { user, updateUser } = useStoreUser();
 
   const Tab = createMaterialTopTabNavigator();
 
@@ -48,9 +48,11 @@ const ProfileScreen = () => {
 
         <Image
           style={styles.profileImage}
-          source={{
-            uri: user?.profileIcon,
-          }}
+          source={match(!!user?.profileIcon)
+            .with(true, () => ({
+              uri: user?.profileIcon,
+            }))
+            .otherwise(() => require("@/assets/images/graphics/user.png"))}
         />
 
         <Text style={styles.username}>{user?.name}</Text>
@@ -61,7 +63,7 @@ const ProfileScreen = () => {
       <View style={{ flex: 1 }}>
         <Tab.Navigator style={{ flex: 1 }}>
           <Tab.Screen name="Bookings" component={Bookings} />
-          <Tab.Screen name="Trips" component={Trips} />
+          {/* <Tab.Screen name="Trips" component={Trips} /> */}
           <Tab.Screen name="Info" component={Info} />
         </Tab.Navigator>
       </View>
@@ -80,7 +82,10 @@ const ProfileScreen = () => {
         title={"Profile"}
         titleColor="white"
         // onBackPressed={router.canGoBack() ? handleBackPressed : undefined}
-        onSearch={() => {}}
+        onSearchClick={() => {
+          updateUser(null);
+        }}
+        searchIcon={<AntDesign name="logout" size={22} />}
       />
 
       {/* <View
@@ -136,6 +141,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     borderColor: "#dddddd83",
+    backgroundColor: "#ddd",
     borderWidth: 2,
     borderRadius: 50,
     alignSelf: "center",

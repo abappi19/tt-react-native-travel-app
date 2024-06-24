@@ -13,6 +13,10 @@ export const useLoginOnComplete = () => {
       if (data.message === "success") {
         updateUser(data.payload);
 
+        if (router.canGoBack()) {
+          router.back();
+          return;
+        }
         router.replace(AppRoutePath.initial);
       }
     },

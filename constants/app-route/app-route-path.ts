@@ -5,7 +5,12 @@ export const AppRoutePath = {
     hotelSearch: "/(search)/hotel-search",
   },
   onboarding: "/onboarding",
-  recommendations: "/recommendations",
+  recommendations: {
+    initial: "/recommendations",
+    byId(id: string | number) {
+      return `/recommendations/${id}`;
+    },
+  },
   nearbyHotels: "/nearby-hotels",
   tabs: {
     home: "/(tabs)/home",
@@ -17,20 +22,20 @@ export const AppRoutePath = {
     signin: "/(authentication)/signin",
     register: "/(authentication)/register",
   },
-  places(id: number) {
+  places(id: string | number) {
     return `/places/${id}`;
   },
   hotels: {
-    initial(id: number) {
+    initial(id: string | number) {
       return `/hotels/${id}`;
     },
-    selectRoom(id: number) {
+    selectRoom(id: string | number) {
       return `/hotels/${id}/select-room`;
     },
-    selectedRoom(hotelId: number, roomId: number) {
+    selectedRoom(hotelId: string | number, roomId: string | number) {
       return `/hotels/${hotelId}/selected-room/${roomId}`;
     },
-    reviews(id: number) {
+    reviews(id: string | number) {
       return `/hotels/${id}/reviews`;
     },
   },

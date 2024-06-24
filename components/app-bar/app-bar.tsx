@@ -18,6 +18,7 @@ type AppBarType = {
   style?: StyleProp<ViewStyle>;
   titleColor?: string;
   onSearchClick?: () => void;
+  searchIcon?: any;
 };
 
 const AppBar = ({
@@ -27,6 +28,7 @@ const AppBar = ({
   style,
   titleColor = "black",
   onSearchClick,
+  searchIcon
 }: AppBarType) => {
   const [open, setOpen] = useState(false);
   return (
@@ -64,6 +66,7 @@ const AppBar = ({
             onSateChange={setOpen}
             onSearch={onSearch}
             onSearchClick={onSearchClick}
+            searchIcon={searchIcon}
           />
         }
       </View>

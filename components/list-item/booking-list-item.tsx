@@ -4,15 +4,11 @@ import { router } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const RecommendationListItem = ({
-  item,
-}: {
-  item: AppTypes.PlaceType;
-}) => {
+const BookingListItem = ({ item }: { item: AppTypes.BookingType }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        router.push(AppRoutePath.recommendations.byId(item.id));
+        router.push(AppRoutePath.hotels.initial(item.hotel.id));
       }}
     >
       <View style={styles.container}>
@@ -20,14 +16,14 @@ const RecommendationListItem = ({
           style={styles.image}
           resizeMethod="resize"
           resizeMode="cover"
-          source={item.image}
+          source={item.room.image}
         />
         <View style={styles.descriptionWrapper}>
-          <Text style={styles.title}>{item.name}</Text>
-          <Text style={styles.subtitle}>{item.location}</Text>
+          <Text style={styles.title}>{item.room.name}</Text>
+          <Text style={styles.subtitle}>{item.hotel.name}</Text>
           <View style={styles.rattingWrapper}>
-            <Text style={styles.rating}> ★ {item.rating} </Text>
-            <Text style={styles.review}>{` (${item.review}) `}</Text>
+            <Text style={styles.rating}> ★ {item.room.rating} </Text>
+            <Text style={styles.review}>{` (${item.room.review}) `}</Text>
           </View>
         </View>
       </View>
@@ -35,7 +31,7 @@ const RecommendationListItem = ({
   );
 };
 
-export default RecommendationListItem;
+export default BookingListItem;
 
 const styles = StyleSheet.create({
   header: {

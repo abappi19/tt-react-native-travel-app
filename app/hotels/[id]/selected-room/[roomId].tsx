@@ -1,4 +1,5 @@
 import {
+  Alert,
   FlatList,
   Image,
   ScrollView,
@@ -13,7 +14,6 @@ import AppBar from "@/components/app-bar/app-bar";
 import { router, useLocalSearchParams } from "expo-router";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import RecommendationListItem from "@/components/list-item/recommendation-list-item";
-import recommendations from "@/assets/data/recommendations";
 import rooms from "@/assets/data/rooms";
 import RoomListItem from "@/components/list-item/room-list-item";
 import hotels from "@/assets/data/hotels";
@@ -21,6 +21,9 @@ import { AppTypes } from "@/types";
 import { Rating } from "react-native-ratings";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "@/components/button/button";
+import BookSuccess from "@/components/hotel/book-success";
+import { useStoreUser, useStoreUserBookings } from "@/library/store/user";
+import { useServiceBookingUpdate } from "@/library/service/booking.service";
 
 const SelectedRoom = () => {
   const { id, roomId } = useLocalSearchParams();
@@ -28,22 +31,51 @@ const SelectedRoom = () => {
   const [totalGuest, setTotalGuest] = useState(0);
   const [bookSuccess, setBookSuccess] = useState(false);
 
+  const { user } = useStoreUser();
+  const BookingUpdateService = useServiceBookingUpdate({
+    onComplete(response) {
+      if (response.message === "success") {
+        setBookSuccess(true);
+      }
+    },
+  });
+
   const hotel = useMemo(() => {
     return hotels.find((hotel) => hotel.id === Number(id));
-  }, [id]);
+  }, [id]) as any;
 
-  const room = rooms.find((room) => room.id === Number(roomId));
+  const room = rooms.find(
+    (room) => room.id === Number(roomId)
+  ) as AppTypes.RoomType;
+
+  if (room && hotel) {
+    room.hotel = hotel;
+  }
 
   const handleBackPressed = () => {
-    // if (router.canGoBack())
     router.back();
-    // router.push(AppRoutePath.hotels.initial(Number(id)));
   };
 
-  const handleBookNow = () => {};
+  const handleBookNow = () => {
+    if (!user) {
+      router.push(AppRoutePath.authentication.signin);
+      return;
+    }
 
+    BookingUpdateService.updateBooking({
+      bookingDate: Date.now().toString(),
+      expireDate: Date.now().toString(),
+      hotel: hotel,
+      room: room,
+      totalGuest: totalGuest,
+    });
+  };
 
-  
+  const handleOnBookDone = () => {
+    router.replace(AppRoutePath.initial);
+  };
+
+  if (bookSuccess) return <BookSuccess room={room} onDone={handleOnBookDone} />;
 
   return (
     <SafeAreaView>
@@ -130,7 +162,11 @@ const SelectedRoom = () => {
                 </View>
               </View>
 
-              <Button onPress={handleBookNow} title="Book Now" />
+              <Button
+                isLoading={BookingUpdateService.isLoading}
+                onPress={handleBookNow}
+                title="Book Now"
+              />
             </View>
           </View>
         </View>

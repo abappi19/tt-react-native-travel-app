@@ -4,7 +4,7 @@ import { create } from "zustand";
 type UserStore = {
   user: AppTypes.UserType | null;
   bookings: AppTypes.BookingType[];
-  updateUser: (user: AppTypes.UserType) => void;
+  updateUser: (user: AppTypes.UserType | null) => void;
   addToBookings: (booking: AppTypes.BookingType) => void;
 };
 

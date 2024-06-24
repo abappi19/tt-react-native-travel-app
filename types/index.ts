@@ -1,4 +1,4 @@
-export namespace ServerResponseTypes  {
+export namespace ServerResponseTypes {
   export type TApiResponse<T> = {
     nonce: number;
     status: number;
@@ -21,10 +21,8 @@ export namespace ServerResponseTypes  {
     message: string;
     error: IErrorError;
   }
-
 }
 export namespace AppTypes {
-  
   export type CountryType = {
     id: number;
     countryId: number;
@@ -43,7 +41,7 @@ export namespace AppTypes {
     profileIcon?: string;
   };
 
-  export type RecommendationType = {
+  export type PlaceType = {
     id: number;
     countryId: number;
     name: string;
@@ -51,6 +49,7 @@ export namespace AppTypes {
     review: string;
     image: any;
     location: string;
+    description: string;
   };
 
   export type RoomType = {
@@ -60,11 +59,14 @@ export namespace AppTypes {
     rating: number;
     review: string;
     image: any;
+    price_per_night: number;
     hotel: null | HotelType;
   };
 
   export type BookingType = {
     hotel: HotelType;
+    room: RoomType;
+    totalGuest: number;
     bookingDate: string;
     expireDate: string;
   };

@@ -1,4 +1,4 @@
-import recommendatoins from "@/assets/data/recommendations";
+import places from "@/assets/data/places";
 import AppBar from "@/components/app-bar/app-bar";
 import RecommendationListItem from "@/components/list-item/recommendation-list-item";
 import { router } from "expo-router";
@@ -6,15 +6,15 @@ import React, { useMemo, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function OnboardingScreen() {
+export default function Recommendations() {
   const [search, setSearch] = useState("");
 
-  const filteredRecommendations = useMemo(() => {
-    if (!search) return recommendatoins;
+  const filteredPlaces = useMemo(() => {
+    if (!search) return places;
 
     const msearch = search.toLowerCase().trim();
 
-    return recommendatoins.filter((r) =>
+    return places.filter((r) =>
       r.name.toLowerCase().trim().includes(msearch)
     );
   }, [search]);
@@ -32,7 +32,7 @@ export default function OnboardingScreen() {
       <View style={styles.container}>
         <FlatList
           showsHorizontalScrollIndicator={false}
-          data={filteredRecommendations}
+          data={filteredPlaces}
           ListFooterComponent={() => <View style={styles.separator} />}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
           renderItem={({ item }) => <RecommendationListItem item={item} />}
