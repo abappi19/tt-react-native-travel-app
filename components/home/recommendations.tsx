@@ -17,7 +17,7 @@ import RecommendationListItem from "../list-item/recommendation-list-item";
 
 const Recommendations = () => {
   const handleOnRecommendedIconPressed = () => {
-    router.push(AppRoutePath.recommendations.initial);
+    router.push(AppRoutePath.places.initial);
   };
 
   return (

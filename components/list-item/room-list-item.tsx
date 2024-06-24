@@ -10,7 +10,7 @@ const RoomListItem = ({ item }: { item: AppTypes.RoomType }) => {
   return (
     // <TouchableOpacity
     //   onPress={() => {
-    //     router.push(AppRoutePath.places(item.id));
+    //     router.push(AppRoutePath.countries(item.id));
     //   }}
     // >
     <View style={styles.container}>

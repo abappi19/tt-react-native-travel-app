@@ -1,4 +1,5 @@
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
+import { useStoreOnboarded } from "@/library/store/onboard";
 import { Redirect, usePathname } from "expo-router";
 import React, { useCallback, useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
@@ -12,11 +13,11 @@ const Index = () => {
 
   const pathName = usePathname();
 
-  const onboarded = false;
+  const { isOnboarded } = useStoreOnboarded();
 
   const handleRouting = useCallback(() => {
     console.log("handle routing called");
-    if (!onboarded) {
+    if (!isOnboarded) {
       return setMoveToScreen(AppRoutePath.onboarding);
     }
     if (pathName === "/") {

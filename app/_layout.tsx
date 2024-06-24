@@ -1,14 +1,9 @@
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
-import { Colors } from "@/constants/tokens/colors";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack, usePathname } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { LogBox } from "react-native";
 import "react-native-gesture-handler";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -91,6 +86,13 @@ const RootLayout = () => {
         options={{ headerShown: false, statusBarStyle: "dark" }}
       />
       <Stack.Screen
+        name="(profile)"
+        options={{
+          headerShown: false,
+          statusBarStyle: "dark",
+        }}
+      />
+      <Stack.Screen
         name="(search)"
         options={{
           headerShown: false,
@@ -100,7 +102,7 @@ const RootLayout = () => {
         }}
       />
       <Stack.Screen
-        name="places"
+        name="countries"
         options={{ headerShown: false, statusBarStyle: "dark" }}
       />
       <Stack.Screen
@@ -112,7 +114,7 @@ const RootLayout = () => {
         options={{ headerShown: false, statusBarStyle: "dark" }}
       />
       <Stack.Screen
-        name="recommendations"
+        name="places"
         options={{ headerShown: false, statusBarStyle: "dark" }}
       />
       <Stack.Screen

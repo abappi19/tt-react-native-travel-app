@@ -1,15 +1,8 @@
 import { Stack } from "expo-router";
-export default function RecommendationsLayout() {
+import { View } from "react-native";
+export default function PlacesLayout() {
   return (
     <Stack>
-      <Stack.Screen
-        name="index"
-        options={{
-          title: "Recommendations",
-          headerShown: false,
-        }}
-      />
-
       <Stack.Screen
         name="[id]"
         options={{

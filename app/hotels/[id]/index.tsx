@@ -55,7 +55,7 @@ const HotelDetails = () => {
         title={hotel?.name}
         // titleColor="white"
         onBackPressed={router.canGoBack() ? handleBackPressed : undefined}
-        onSearch={() => {}}
+        // onSearch={() => {}}
       />
 
       <ScrollView>
@@ -113,9 +113,9 @@ const HotelDetails = () => {
                 <Text style={[styles.header, { paddingVertical: 8 }]}>
                   Reviews
                 </Text>
-                <TouchableOpacity onPress={handleOnReviewsButtonClick}>
+                {/* <TouchableOpacity onPress={handleOnReviewsButtonClick}>
                   <Feather name="list" size={24} color="black" />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
               <FlatList
                 nestedScrollEnabled

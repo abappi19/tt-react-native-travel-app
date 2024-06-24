@@ -1,6 +1,7 @@
 import OnboardingItemView from "@/components/onboarding/onboarding-item-view";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import SIZES from "@/constants/tokens/sizes";
+import { useStoreOnboarded } from "@/library/store/onboard";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
 import {
@@ -40,12 +41,15 @@ export default function OnboardingScreen() {
     setCurrentIndex(index);
   };
 
+  const { updateIsOnboarded } = useStoreOnboarded();
+
   const isLastSlide = currentIndex === slides.length - 1;
 
   const handleNext = () => {
     if (!isLastSlide) {
       (flatListRef.current as any).scrollToIndex({ index: currentIndex + 1 });
     } else {
+      updateIsOnboarded(true);
       router.replace(AppRoutePath.tabs.home);
     }
   };

@@ -1,20 +1,23 @@
 import { Stack } from "expo-router";
-export default function RecommendationsLayout() {
+export default function PlacesLayout() {
   return (
     <Stack>
       <Stack.Screen
-        name="index"
+        name="payments"
         options={{
-          title: "Recommendations",
           headerShown: false,
         }}
       />
-
       <Stack.Screen
-        name="[id]"
+        name="personal-info"
         options={{
           headerShown: false,
-          statusBarTranslucent: true,
+        }}
+      />
+      <Stack.Screen
+        name="settings"
+        options={{
+          headerShown: false,
         }}
       />
     </Stack>

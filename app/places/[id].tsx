@@ -10,7 +10,6 @@ import {
   View,
 } from "react-native";
 
-import countries from "@/assets/data/countries";
 import places from "@/assets/data/places";
 import AppBar from "@/components/app-bar/app-bar";
 import Button from "@/components/button/button";
@@ -25,8 +24,8 @@ const PlaceDetails = () => {
   const [scrolled, setScrolled] = useState(false);
   const { top } = useSafeAreaInsets();
 
-  const country = useMemo(() => {
-    return countries.find((country) => country.id === Number(id));
+  const place = useMemo(() => {
+    return places.find((place) => place.id === Number(id));
   }, [id]);
 
   // useEffect(() => {
@@ -50,10 +49,10 @@ const PlaceDetails = () => {
         }}
       >
         <View>
-          <Image style={styles.image} source={country?.image} />
+          <Image style={styles.image} source={place?.image} />
           <View style={{ padding: 8 }}>
-            <Text style={styles.title}>{country?.name}</Text>
-            <Text style={styles.description}>{country?.description}</Text>
+            <Text style={styles.title}>{place?.name}</Text>
+            <Text style={styles.description}>{place?.description}</Text>
 
             <View
               style={{
@@ -63,9 +62,9 @@ const PlaceDetails = () => {
               }}
             >
               <Text style={styles.header}>Popular Destinations</Text>
-              <TouchableOpacity onPress={() => {}}>
+              {/* <TouchableOpacity onPress={() => {}}>
                 <Feather name="list" size={24} color="black" />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
             <FlatList
               nestedScrollEnabled
@@ -90,10 +89,10 @@ const PlaceDetails = () => {
           height: top + 48,
           backgroundColor: scrolled ? "#00000083" : "transparent",
         }}
-        title={country?.name}
+        title={place?.name}
         titleColor="white"
         onBackPressed={router.canGoBack() ? handleBackPressed : undefined}
-        onSearch={() => {}}
+        // onSearch={() => {}}
       />
 
       <View

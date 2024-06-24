@@ -16,7 +16,7 @@ const CountryListItem = ({ item }: { item: AppTypes.CountryType }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        router.push(AppRoutePath.places(item.id));
+        router.push(AppRoutePath.countries(item.id));
       }}
     >
       <View style={styles.container}>

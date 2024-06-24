@@ -12,7 +12,7 @@ const RecommendationListItem = ({
   return (
     <TouchableOpacity
       onPress={() => {
-        router.push(AppRoutePath.recommendations.byId(item.id));
+        router.push(AppRoutePath.places.byId(item.id));
       }}
     >
       <View style={styles.container}>

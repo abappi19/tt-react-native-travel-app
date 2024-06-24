@@ -4,11 +4,16 @@ export const AppRoutePath = {
     normalSearch: "/(search)/normal-search",
     hotelSearch: "/(search)/hotel-search",
   },
+  profile: {
+    settings: "/(profile)/settings",
+    personalInfo: "/(profile)/personal-info",
+    payments: "/(profile)/payments",
+  },
   onboarding: "/onboarding",
-  recommendations: {
-    initial: "/recommendations",
+  places: {
+    initial: "/places",
     byId(id: string | number) {
-      return `/recommendations/${id}`;
+      return `/places/${id}`;
     },
   },
   nearbyHotels: "/nearby-hotels",
@@ -22,8 +27,8 @@ export const AppRoutePath = {
     signin: "/(authentication)/signin",
     register: "/(authentication)/register",
   },
-  places(id: string | number) {
-    return `/places/${id}`;
+  countries(id: string | number) {
+    return `/countries/${id}`;
   },
   hotels: {
     initial(id: string | number) {
