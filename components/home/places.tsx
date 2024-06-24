@@ -1,4 +1,3 @@
-import countries from "@/assets/data/countries";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import { AppTypes } from "@/types";
 import { router } from "expo-router";
@@ -11,27 +10,14 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { CountryListItem } from "../list-item/country-list-item";
+import countries from "@/assets/data/countries";
 
-const CountryListItem = ({ item }: { item: AppTypes.CountryType }) => {
-  return (
-    <TouchableOpacity
-      onPress={() => {
-        router.push(AppRoutePath.countries(item.id));
-      }}
-    >
-      <View style={styles.container}>
-        <Image
-          style={styles.image}
-          resizeMethod="resize"
-          resizeMode="cover"
-          source={item.image}
-        />
-        <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-};
 const Places = () => {
+
+
+
+
   return (
     <View style={{ paddingTop: 22 }}>
       <Text style={styles.title}>Places</Text>
