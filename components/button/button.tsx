@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   StyleProp,
   StyleSheet,
   Text,
@@ -29,7 +30,7 @@ const Button = ({
       onPress={onPress}
     >
       {match(isLoading)
-        .with(true, () => null)
+        .with(true, () => <ActivityIndicator size={24} color="white" />)
         .otherwise(() =>
           match(!!children)
             .with(true, () => children)

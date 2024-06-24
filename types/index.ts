@@ -53,6 +53,16 @@ export namespace AppTypes {
     location: string;
   };
 
+  export type RoomType = {
+    id: number;
+    hotelId: number;
+    name: string;
+    rating: number;
+    review: string;
+    image: any;
+    hotel: null | HotelType;
+  };
+
   export type BookingType = {
     hotel: HotelType;
     bookingDate: string;

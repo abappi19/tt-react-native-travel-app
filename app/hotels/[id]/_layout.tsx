@@ -18,6 +18,13 @@ export default function PlacesLayout() {
         }}
       />
       <Stack.Screen
+        name="selected-room/[roomId]"
+        options={{
+          headerShown: false,
+          // statusBarTranslucent: true,
+        }}
+      />
+      <Stack.Screen
         name="reviews"
         options={{
           headerShown: false,

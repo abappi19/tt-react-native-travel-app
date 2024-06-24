@@ -8,12 +8,13 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Alert, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
-import HookformTextInput from "@/components/input/hookform-text-input";
 import * as z from "zod";
-import { useServiceAuthRegister } from "@/library/service/auth.service";
+// import { useServiceAuthRegister } from "@/library/service/auth.service";
 
 const Register = () => {
-  const registerService = useServiceAuthRegister();
+  const registerService = {
+    hookForm: null,
+  };
 
   function handleSigninPress() {
     router.replace(AppRoutePath.authentication.signin);
@@ -42,32 +43,21 @@ const Register = () => {
               height: 200,
             }}
           />
-          <HookformTextInput
-            hookForm={registerService.hookForm}
-            name="name"
-            placeholder="Name"
-          />
-          <HookformTextInput
-            hookForm={registerService.hookForm}
-            name="email"
-            placeholder="Email"
-          />
-          <HookformTextInput
-            hookForm={registerService.hookForm}
-            name="newPassword"
-            placeholder="New Password"
-          />
-          <HookformTextInput
-            hookForm={registerService.hookForm}
-            name="confirmPassword"
-            placeholder="Confirm Password"
-          />
+          <MyTextInput placeholder="Name" />
+          <MyTextInput placeholder="Email" />
+          <MyTextInput placeholder="New Password" />
+          <MyTextInput placeholder="Confirm Password" />
           {/* <View style={{ flex: 1 }}> */}
           <Button
             style={{ width: "100%", padding: 8 }}
             title="REGISTER"
-            onPress={registerService.onSubmit}
-            isLoading={registerService.isLoading}
+            onPress={() => {
+              Alert.alert(
+                "Oops!",
+                "Fake API doesn't provide registration facilities."
+              );
+            }}
+            isLoading={false}
           />
           {/* </View> */}
         </View>

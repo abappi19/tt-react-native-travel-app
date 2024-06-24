@@ -59,7 +59,6 @@ const App = () => {
       <SafeAreaProvider>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <RootLayout />
-
           <StatusBar style="light" />
         </GestureHandlerRootView>
       </SafeAreaProvider>

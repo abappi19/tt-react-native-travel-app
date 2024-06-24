@@ -1,17 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { AuthRepository, TLoginResponse } from "../repository/auth.repository";
 import { AppTypes, ServerResponseTypes } from "@/types";
-import {
-  TValidAuthRegisterFormSchema,
-  ValidAuthRegisterFormSchema,
-} from "@/validation/auth.validation";
 
 type TApiResponsetype = {
-  data: ServerResponseTypes.TApiResponse<null>;
-};
-type TDataType = {
-  email: string;
-  password: string;
+  data: ServerResponseTypes.TApiResponse<AppTypes.UserType>;
 };
 
 const useQueryAuthLogin = () =>
@@ -23,26 +15,32 @@ const useQueryAuthLogin = () =>
       };
     },
     {
-      data: TDataType;
-      fn: (data: TDataType) => any;
+      email: string;
+      password: string;
     }
   >({
     mutationFn: AuthRepository.login,
   });
 
-const useQueryAuthRegister = () =>
-  useMutation<
-    {
-      data: ServerResponseTypes.TApiResponse<null>;
-    },
-    {
-      response: {
-        data: ServerResponseTypes.IError;
-      };
-    },
-    TValidAuthRegisterFormSchema
-  >({
-    mutationFn: AuthRepository.register,
-  });
+// const useQueryAuthRegister = ({ onComplete }: { onComplete: () => void }) =>
+//   useMutation<
+//     {
+//       data: ServerResponseTypes.TApiResponse<null>;
+//     },
+//     {
+//       response: {
+//         data: ServerResponseTypes.IError;
+//       };
+//     },
+//     {
+//       data: TValidAuthRegisterFormSchema;
+//       fn: (data: TValidAuthRegisterFormSchema) => any;
+//     }
+//   >({
+//     mutationFn: AuthRepository.register,
+//   });
 
-export { useQueryAuthLogin, useQueryAuthRegister };
+export {
+  useQueryAuthLogin,
+  // useQueryAuthRegister
+};

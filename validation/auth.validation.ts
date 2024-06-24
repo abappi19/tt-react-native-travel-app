@@ -25,4 +25,22 @@ const ValidAuthRegisterFormSchema = z
 
 type TValidAuthRegisterFormSchema = z.infer<typeof ValidAuthRegisterFormSchema>;
 
-export { TValidAuthRegisterFormSchema, ValidAuthRegisterFormSchema };
+const ValidAuthLoginFormSchema = z.object({
+  email: z.string().email("Email is required"),
+  password: z
+    .string()
+    .min(8)
+    .regex(
+      /^.*(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()' "]).*$/gs,
+      "Password must have at least one uppercase letter, one lowercase letter, one number, and one special character"
+    ),
+});
+
+type TValidAuthLoginFormSchema = z.infer<typeof ValidAuthLoginFormSchema>;
+
+export {
+  TValidAuthRegisterFormSchema,
+  ValidAuthRegisterFormSchema,
+  ValidAuthLoginFormSchema,
+  TValidAuthLoginFormSchema,
+};

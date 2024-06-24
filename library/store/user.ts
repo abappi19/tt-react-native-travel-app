@@ -25,14 +25,14 @@ const useUserStore = create<UserStore>((set) => {
   };
 });
 
-export const useUser = () => {
+export const useStoreUser = () => {
   const user = useUserStore((state) => state.user);
   const updateUser = useUserStore((state) => state.updateUser);
 
   return { user, updateUser };
 };
 
-export const useUserBookings = () => {
+export const useStoreUserBookings = () => {
   const bookings = useUserStore((state) => state.bookings);
   const addToBookings = useUserStore((state) => state.addToBookings);
 

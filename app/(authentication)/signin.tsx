@@ -1,16 +1,37 @@
 import Button from "@/components/button/button";
-import MyTextInput from "@/components/input/my-text-input";
+import HookformTextInput from "@/components/input/hookform-text-input";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import SIZES from "@/constants/tokens/sizes";
+import { useLoginOnComplete } from "@/library/hooks/auth/use-login-on-complete";
+import { useServiceAuthLogin } from "@/library/service/auth.service";
+import { useStoreUser } from "@/library/store/user";
 import { router } from "expo-router";
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, Image, ScrollView, StyleSheet, Text, View } from "react-native";
+
+// const {manifest} = Constants;
 
 const Signin = () => {
-  function handleSigninPress() {}
+  // const { user, updateUser } = useStoreUser();
+  const {onComplete} = useLoginOnComplete();
+
+  const LoginAuthService = useServiceAuthLogin({
+    onComplete(data) {
+      if (data.message === "failed") {
+        Alert.alert(
+          "Oops!",
+          "Failed to login. Please confirm username and password and try again."
+        );
+        return;
+      }
+      onComplete(data);
+    },
+  });
+
   function handleRegisterPress() {
     router.replace(AppRoutePath.authentication.register);
   }
+
   return (
     <ScrollView
       style={{
@@ -34,18 +55,16 @@ const Signin = () => {
               height: 200,
             }}
           />
-          <MyTextInput
-            style={{}}
+          <HookformTextInput
+            hookForm={LoginAuthService.hookForm}
+            name="email"
             placeholder="Email"
-            keyboardType="email-address"
-            textContentType="emailAddress"
           />
 
-          <MyTextInput
-            inputMode="text"
-            passwordRules="required: upper; required: lower; required: digit; max-consecutive: 2; minlength: 8;"
+          <HookformTextInput
+            hookForm={LoginAuthService.hookForm}
+            name="password"
             isPasswordInput={true}
-            style={{}}
             placeholder="Password"
           />
 
@@ -53,7 +72,8 @@ const Signin = () => {
           <Button
             style={{ width: "100%", padding: 8 }}
             title="SIGN IN"
-            onPress={handleSigninPress}
+            onPress={LoginAuthService.onSubmit}
+            isLoading={LoginAuthService.isLoading}
           />
           {/* </View> */}
         </View>

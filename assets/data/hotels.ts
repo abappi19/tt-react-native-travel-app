@@ -10,6 +10,7 @@ const hotels = [
       name: "Banani, Dhaka",
     },
     image: require(`@/assets/images/hotel/hotel1.jpg`),
+    
     description:
       "Hotel Paradise offers luxurious accommodations with stunning views of the city. Located in the heart of Banani, it provides easy access to shopping centers, restaurants, and entertainment venues. The hotel features elegantly appointed rooms and suites, each equipped with modern amenities to ensure a comfortable stay. Guests can enjoy a range of dining options, including fine international cuisine at the on-site restaurant. Other amenities include a fitness center, spa, and swimming pool. Whether you're traveling for business or leisure, Hotel Paradise offers the perfect blend of comfort, convenience, and luxury.",
     reviewList: [
@@ -42,6 +43,7 @@ const hotels = [
       name: "Gulshan, Dhaka",
     },
     image: require(`@/assets/images/hotel/hotel2.jpg`),
+    
     description:
       "Sunset Inn offers comfortable accommodation in the heart of Gulshan. Situated within walking distance of popular attractions, shopping centers, and restaurants, the hotel provides an ideal base for exploring the city. The guest rooms are tastefully decorated and feature modern amenities to ensure a pleasant stay. Guests can enjoy a range of facilities, including a rooftop swimming pool, fitness center, and business center. The hotel's restaurant serves a variety of local and international dishes, catering to all tastes. Whether you're traveling for business or leisure, Sunset Inn offers a convenient and comfortable stay.",
     reviewList: [
@@ -74,6 +76,7 @@ const hotels = [
       name: "Bashundhara, Dhaka",
     },
     image: require(`@/assets/images/hotel/hotel3.jpg`),
+    
     description:
       "City Lights Hotel offers modern accommodations with a touch of luxury in the vibrant Bashundhara area. The hotel is conveniently located near major shopping malls, business centers, and entertainment venues, making it an ideal choice for both business and leisure travelers. Each room is designed with contemporary decor and equipped with all the necessary amenities to ensure a comfortable and enjoyable stay. Guests can unwind at the rooftop bar, enjoy a meal at the hotel's restaurant, or relax in the spa and wellness center. City Lights Hotel is dedicated to providing exceptional service and a memorable experience for all its guests.",
     reviewList: [
@@ -106,6 +109,7 @@ const hotels = [
       name: "Uttara, Dhaka",
     },
     image: require(`@/assets/images/hotel/hotel4.jpg`),
+    
     description:
       "Grand Central Hotel offers an elegant and sophisticated stay in the bustling Uttara area. The hotel is renowned for its exceptional service, luxurious accommodations, and convenient location. Guests can choose from a variety of rooms and suites, each beautifully furnished and equipped with modern amenities. The hotel boasts multiple dining options, including a fine dining restaurant, a casual cafe, and a stylish bar. Additional amenities include a fitness center, swimming pool, and business facilities. Grand Central Hotel is committed to making every guest's stay as enjoyable and comfortable as possible.",
     reviewList: [
@@ -138,6 +142,7 @@ const hotels = [
       name: "Dhanmondi, Dhaka",
     },
     image: require(`@/assets/images/hotel/hotel5.jpg`),
+    
     description:
       "Riverside Hotel is a charming boutique hotel located in the scenic Dhanmondi area. The hotel offers a peaceful retreat from the hustle and bustle of the city, with beautiful views of the nearby lake. Each room is elegantly decorated and equipped with all the necessary amenities for a relaxing stay. Guests can enjoy a range of facilities, including a rooftop terrace, a fitness center, and a cozy restaurant serving local and international cuisine. Riverside Hotel is perfect for travelers looking for a tranquil and comfortable stay in Dhaka.",
     reviewList: [

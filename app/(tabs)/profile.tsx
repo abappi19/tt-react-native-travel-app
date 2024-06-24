@@ -11,14 +11,14 @@ import { Colors } from "@/constants/tokens/colors";
 import SIZES from "@/constants/tokens/sizes";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useUser } from "@/library/store/user";
+import { useStoreUser } from "@/library/store/user";
 import ProfileGuestComponent from "@/components/profile/profile-guest-component";
 
 const ProfileScreen = () => {
   // "https://th.bing.com/th/id/R.cbe9c6caa4f9030112f28aa9df8e33e2?rik=zz8Nd6%2f5sOoypA&pid=ImgRaw&r=0"
   const { top } = useSafeAreaInsets();
 
-  const { user } = useUser();
+  const { user } = useStoreUser();
 
   const Tab = createMaterialTopTabNavigator();
 

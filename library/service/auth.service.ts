@@ -1,57 +1,78 @@
 import {
-  TValidAuthRegisterFormSchema,
-  ValidAuthRegisterFormSchema,
+  TValidAuthLoginFormSchema,
+  ValidAuthLoginFormSchema,
 } from "@/validation/auth.validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useQueryAuthLogin, useQueryAuthRegister } from "../query/auth.query";
-import { useStoreFakeServerAuth } from "../store/fake-server.store";
+import {
+  useQueryAuthLogin,
+  // useQueryAuthRegister
+} from "../query/auth.query";
+import { AppTypes, ServerResponseTypes } from "@/types";
+// import { useStoreFakeServerAuth } from "../store/xfake-server.store";
+// const useServiceAuthRegister = () => {
+//   // const { register } = useStoreFakeServerAuth();
 
-const useServiceAuthRegister = () => {
-  const hookForm = useForm<TValidAuthRegisterFormSchema>({
-    resolver: zodResolver(ValidAuthRegisterFormSchema),
+//   const hookForm = useForm<TValidAuthRegisterFormSchema>({
+//     resolver: zodResolver(ValidAuthRegisterFormSchema),
+//     defaultValues: {
+//       name: "",
+//       email: "",
+//       newPassword: "",
+//       confirmPassword: "",
+//     },
+//   });
+
+//   const { mutate, isLoading } = useQueryAuthRegister({
+//     onComplete: () => {
+//       console.log("complete queryAuthRegister");
+//     },
+//   });
+
+//   const onSubmit = hookForm.handleSubmit((data) => {
+//     mutate(data);
+//   });
+
+//   return { hookForm, onSubmit, isLoading };
+// };
+
+const useServiceAuthLogin = ({
+  onComplete,
+}: {
+  onComplete: (
+    data: ServerResponseTypes.TApiResponse<AppTypes.UserType>
+  ) => void;
+}) => {
+  const hookForm = useForm<TValidAuthLoginFormSchema>({
+    resolver: zodResolver(ValidAuthLoginFormSchema),
     defaultValues: {
-      name: "",
       email: "",
-      newPassword: "",
-      confirmPassword: "",
-    },
-  });
-
-  const { mutate, isLoading } = useQueryAuthRegister();
-
-  const onSubmit = hookForm.handleSubmit((data) => {
-    mutate(data);
-  });
-
-  return { hookForm, onSubmit, isLoading };
-};
-
-const useServiceAuthLogin = () => {
-  const { login } = useStoreFakeServerAuth();
-  const hookForm = useForm<TValidAuthRegisterFormSchema>({
-    resolver: zodResolver(ValidAuthRegisterFormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      newPassword: "",
-      confirmPassword: "",
+      password: "",
     },
   });
 
   const { mutate, isLoading } = useQueryAuthLogin();
 
-  const onSubmit = hookForm.handleSubmit(({ email, confirmPassword }) => {
-    mutate({
-      data: {
+  const onSubmit = hookForm.handleSubmit(({ email, password }) => {
+    mutate(
+      {
         email,
-        password: confirmPassword,
+        password,
       },
-      fn: login,
-    });
+      {
+        onSuccess(response) {
+          // console.log("response is: ", response);
+
+          if (typeof onComplete === "function") onComplete(response.data);
+        },
+      }
+    );
   });
 
   return { hookForm, onSubmit, isLoading };
 };
 
-export { useServiceAuthLogin, useServiceAuthRegister };
+export {
+  useServiceAuthLogin,
+  // useServiceAuthRegister
+};

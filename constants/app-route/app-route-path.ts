@@ -27,6 +27,9 @@ export const AppRoutePath = {
     selectRoom(id: number) {
       return `/hotels/${id}/select-room`;
     },
+    selectedRoom(hotelId: number, roomId: number) {
+      return `/hotels/${hotelId}/selected-room/${roomId}`;
+    },
     reviews(id: number) {
       return `/hotels/${id}/reviews`;
     },

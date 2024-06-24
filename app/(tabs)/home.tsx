@@ -4,6 +4,7 @@ import Places from "@/components/home/places";
 import Recommendations from "@/components/home/recommendations";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import SIZES from "@/constants/tokens/sizes";
+import { useStoreUser } from "@/library/store/user";
 import { Utils } from "@/utils/utils";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
@@ -42,6 +43,8 @@ export default function Index() {
     },
   ];
 
+  const { user } = useStoreUser();
+
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const index = Math.round(event.nativeEvent.contentOffset.x / SIZES.width);
     setCurrentIndex(index);
@@ -65,7 +68,7 @@ export default function Index() {
     <SafeAreaView>
       <View>
         <AppBar
-          title={`${Utils.getIsNight() ? "🌙" : "☀️"}  ${"User!"}`}
+          title={`${Utils.getIsNight() ? "🌙" : "☀️"}  ${user?.name}`}
           // onSearch={handleSearch}
           onSearchClick={handleSearchClick}
         />
