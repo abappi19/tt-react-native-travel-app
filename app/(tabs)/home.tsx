@@ -7,7 +7,7 @@ import SIZES from "@/constants/tokens/sizes";
 import { useStoreUser } from "@/library/store/user";
 import { Utils } from "@/utils/utils";
 import { router } from "expo-router";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   FlatList,
   NativeScrollEvent,
@@ -16,9 +16,11 @@ import {
   StyleSheet,
   View,
 } from "react-native";
+import { useServiceCountryPaginate } from "@/library/service/country.service";
 
 export default function Index() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { prefetch: prefetchCountries } = useServiceCountryPaginate();
 
   const flatListRef = useRef<FlatList<any>>(null);
 
@@ -63,6 +65,10 @@ export default function Index() {
   const handleSearchClick = () => {
     router.push(AppRoutePath.search.normalSearch);
   };
+
+  useEffect(() => {
+    prefetchCountries();
+  }, []);
 
   return (
     <SafeAreaView>

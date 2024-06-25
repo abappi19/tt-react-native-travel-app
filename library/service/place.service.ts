@@ -8,7 +8,6 @@ import AppQueryKey from "@/constants/app-query/app-query-key.constanst";
 import { useQueryPlacePaginate } from "../query/place.query";
 
 export const useServicePlacePaginate = () => {
-  const queryClient = useQueryClient();
 
   const [params, setParams] = useState<{
     limit: number;

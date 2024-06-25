@@ -22,6 +22,8 @@ const Recommendations = () => {
     router.push(AppRoutePath.recommendations);
   };
 
+  
+
   const { isLoading, placeList, refetch, setFilterData } =
     useServicePlacePaginate();
 
