@@ -1,6 +1,6 @@
 import AppBar from "@/components/app-bar/app-bar";
 import NearbyHotels from "@/components/home/nearby-hotels";
-import Places from "@/components/home/places";
+import Places from "@/components/home/countries";
 import Recommendations from "@/components/home/recommendations";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import SIZES from "@/constants/tokens/sizes";

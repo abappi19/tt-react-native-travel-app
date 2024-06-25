@@ -3,12 +3,13 @@ export default function RecommendationsLayout() {
   return (
     <Stack>
       <Stack.Screen
-        name="[id]"
+        name="index"
         options={{
+          title: "Recommendations",
           headerShown: false,
-          statusBarTranslucent: true,
         }}
       />
+
     </Stack>
   );
 }

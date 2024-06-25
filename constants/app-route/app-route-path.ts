@@ -11,11 +11,11 @@ export const AppRoutePath = {
   },
   onboarding: "/onboarding",
   places: {
-    initial: "/places",
     byId(id: string | number) {
       return `/places/${id}`;
     },
   },
+  recommendations: "/recommendations",
   nearbyHotels: "/nearby-hotels",
   tabs: {
     home: "/(tabs)/home",

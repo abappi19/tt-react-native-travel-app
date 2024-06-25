@@ -1,10 +1,10 @@
-import places from "@/assets/data/places";
 import { AppRoutePath } from "@/constants/app-route/app-route-path";
 import { AppTypes } from "@/types";
 import { Feather } from "@expo/vector-icons";
 import { router, useRouter } from "expo-router";
 import React from "react";
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   StyleSheet,
@@ -14,36 +14,47 @@ import {
   View,
 } from "react-native";
 import RecommendationListItem from "../list-item/recommendation-list-item";
+import { useServicePlacePaginate } from "@/library/service/place.service";
+import { match } from "ts-pattern";
 
 const Recommendations = () => {
   const handleOnRecommendedIconPressed = () => {
-    router.push(AppRoutePath.places.initial);
+    router.push(AppRoutePath.recommendations);
   };
 
-  return (
-    <View style={{ paddingTop: 22 }}>
-      <View
-        style={{
-          paddingHorizontal: 4,
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <Text style={styles.header}>Recommendations</Text>
-        <TouchableOpacity onPress={handleOnRecommendedIconPressed}>
-          <Feather name="list" size={24} color="black" />
-        </TouchableOpacity>
+  const { isLoading, placeList, refetch, setFilterData } =
+    useServicePlacePaginate();
+
+  return match(isLoading)
+    .with(true, () => (
+      <View>
+        <ActivityIndicator size={22} />
       </View>
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={places}
-        ListFooterComponent={() => <View style={styles.separator} />}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
-        renderItem={({ item }) => <RecommendationListItem item={item} />}
-      />
-    </View>
-  );
+    ))
+    .otherwise(() => (
+      <View style={{ paddingTop: 22 }}>
+        <View
+          style={{
+            paddingHorizontal: 4,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Text style={styles.header}>Recommendations</Text>
+          <TouchableOpacity onPress={handleOnRecommendedIconPressed}>
+            <Feather name="list" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={placeList}
+          ListFooterComponent={() => <View style={styles.separator} />}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          renderItem={({ item }) => <RecommendationListItem item={item} />}
+        />
+      </View>
+    ));
 };
 
 export default Recommendations;

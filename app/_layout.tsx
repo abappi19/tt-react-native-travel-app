@@ -118,6 +118,10 @@ const RootLayout = () => {
         options={{ headerShown: false, statusBarStyle: "dark" }}
       />
       <Stack.Screen
+        name="recommendations"
+        options={{ headerShown: false, statusBarStyle: "dark" }}
+      />
+      <Stack.Screen
         name="nearby-hotels"
         options={{ headerShown: false, statusBarStyle: "dark" }}
       />
